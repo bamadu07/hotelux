@@ -18,7 +18,9 @@
             --text-dark: #264653;
             --text-light: #6C757D;
             --whatsapp-color: #25D366;
+            --whatsapp-dark: #128C7E;
             --phone-color: #34B7F1;
+            --success-color: #28A745;
             --border-radius: 16px;
             --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
@@ -107,11 +109,25 @@
             color: white;
             padding: 4rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200') center/cover;
+            opacity: 0.1;
         }
 
         .page-header h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            position: relative;
         }
 
         .page-header p {
@@ -119,6 +135,7 @@
             max-width: 600px;
             margin: 0 auto;
             opacity: 0.9;
+            position: relative;
         }
 
         /* Contact Section */
@@ -152,16 +169,18 @@
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding: 1.5rem;
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
         }
 
         .contact-method:hover {
             transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
 
         .contact-icon {
@@ -174,6 +193,11 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-method.whatsapp .contact-icon {
+            background: var(--whatsapp-color);
         }
 
         .contact-details h3 {
@@ -188,17 +212,20 @@
 
         .contact-details small {
             color: var(--text-light);
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
         /* Boutons d'action */
         .action-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .action-btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
@@ -209,6 +236,9 @@
             border: none;
             cursor: pointer;
             font-size: 0.9rem;
+            flex: 1;
+            min-width: 120px;
+            justify-content: center;
         }
 
         .action-btn.whatsapp {
@@ -216,8 +246,17 @@
             color: white;
         }
 
+        .action-btn.whatsapp:hover {
+            background: var(--whatsapp-dark);
+        }
+
         .action-btn.phone {
             background: var(--phone-color);
+            color: white;
+        }
+
+        .action-btn.email {
+            background: var(--primary-color);
             color: white;
         }
 
@@ -228,12 +267,31 @@
 
         /* WhatsApp Section */
         .whatsapp-section {
-            background: linear-gradient(135deg, var(--whatsapp-color), #128C7E);
+            background: linear-gradient(135deg, var(--whatsapp-color), var(--whatsapp-dark));
             color: white;
             padding: 2rem;
             border-radius: var(--border-radius);
             text-align: center;
             margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-20px, -20px) rotate(360deg); }
         }
 
         .whatsapp-number {
@@ -244,6 +302,7 @@
             border-radius: 50px;
             margin: 1rem 0;
             display: inline-block;
+            position: relative;
         }
 
         .whatsapp-btn {
@@ -259,10 +318,12 @@
             gap: 0.5rem;
             margin-top: 1rem;
             transition: var(--transition);
+            position: relative;
         }
 
         .whatsapp-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         /* Social Section */
@@ -310,6 +371,7 @@
             padding: 2.5rem;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
+            position: relative;
         }
 
         .contact-form h3 {
@@ -353,6 +415,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
         }
 
         .char-counter {
@@ -473,10 +536,13 @@
             align-items: center;
             justify-content: center;
             color: white;
+            position: relative;
         }
 
         .map-content {
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .map-content i {
@@ -513,6 +579,7 @@
         .map-directions i {
             font-size: 1rem;
             width: 20px;
+            color: var(--primary-color);
         }
 
         /* FAQ Section */
@@ -538,6 +605,7 @@
             margin-bottom: 1rem;
             box-shadow: var(--box-shadow);
             overflow: hidden;
+            border-left: 4px solid var(--primary-color);
         }
 
         .faq-question {
@@ -567,11 +635,12 @@
 
         .faq-answer.active {
             padding: 0 1.5rem 1.5rem;
-            max-height: 200px;
+            max-height: 500px;
         }
 
         .faq-answer p {
             color: var(--text-light);
+            line-height: 1.6;
         }
 
         /* Footer */
@@ -658,6 +727,7 @@
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
             transition: var(--transition);
             z-index: 1000;
+            animation: pulse 2s infinite;
         }
 
         .whatsapp-float:hover {
@@ -683,11 +753,18 @@
             box-shadow: 0 8px 25px rgba(52, 183, 241, 0.4);
             transition: var(--transition);
             z-index: 1000;
+            animation: pulse 2s infinite;
         }
 
         .phone-float:hover {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 12px 35px rgba(52, 183, 241, 0.6);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         /* Responsive */
@@ -707,6 +784,7 @@
                 transform: translateY(-100%);
                 opacity: 0;
                 transition: var(--transition);
+                z-index: 1000;
             }
 
             nav ul.active {
@@ -753,6 +831,44 @@
             .phone-float {
                 bottom: 7rem;
             }
+
+            .contact-method {
+                padding: 1rem;
+            }
+
+            .whatsapp-number {
+                font-size: 1.2rem;
+                padding: 0.75rem 1.5rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
         }
     </style>
 </head>
@@ -769,8 +885,8 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="apropos.html">À propos</a></li>
                     <li><a href="reservation.html">Réservation</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
                     <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -779,8 +895,8 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>Contactez-nous</h1>
-            <p>Nous sommes à votre écoute 24h/24 et 7j/7</p>
+            <h1 class="fade-in">Contactez-nous</h1>
+            <p class="fade-in">Nous sommes à votre écoute 24h/24 et 7j/7 pour rendre votre séjour inoubliable</p>
         </div>
     </section>
 
@@ -791,9 +907,31 @@
                 <!-- Informations de contact -->
                 <div class="contact-info">
                     <h2>Prenez contact avec nous</h2>
-                    <p>Notre équipe est disponible pour répondre à toutes vos questions et vous aider à planifier votre séjour inoubliable.</p>
+                    <p>Notre équipe dévouée est disponible pour répondre à toutes vos questions et vous accompagner dans l'organisation de votre séjour parfait.</p>
                     
                     <div class="contact-methods">
+                        <!-- WhatsApp prioritaire -->
+                        <div class="contact-method whatsapp">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>WhatsApp Prioritaire</h3>
+                                <p>+221 78 197 08 44</p>
+                                <small>Réponse immédiate • Réservations express • Assistance 24h/24</small>
+                                <div class="action-buttons">
+                                    <a href="https://wa.me/221781970844" class="action-btn whatsapp" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Message WhatsApp
+                                    </a>
+                                    <a href="tel:+221781970844" class="action-btn phone">
+                                        <i class="fas fa-phone"></i>
+                                        Appeler
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Téléphone principal -->
                         <div class="contact-method">
                             <div class="contact-icon">
@@ -802,38 +940,13 @@
                             <div class="contact-details">
                                 <h3>Téléphone principal</h3>
                                 <p>+221 33 123 45 67</p>
-                                <small>Réception - Disponible 24h/24</small>
+                                <small>Réception - Service multilingue</small>
                                 <div class="action-buttons">
                                     <a href="tel:+221331234567" class="action-btn phone">
                                         <i class="fas fa-phone"></i>
                                         Appeler
                                     </a>
-                                    <a href="https://wa.me/221331234567" class="action-btn whatsapp" target="_blank">
-                                        <i class="fab fa-whatsapp"></i>
-                                        WhatsApp
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- WhatsApp dédié -->
-                        <div class="contact-method">
-                            <div class="contact-icon" style="background: var(--whatsapp-color);">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>WhatsApp dédié</h3>
-                                <p>+221 78 197 08 44</p>
-                                <small>Réservations rapides et informations</small>
-                                <div class="action-buttons">
-                                    <a href="https://wa.me/221781970844" class="action-btn whatsapp" target="_blank">
-                                        <i class="fab fa-whatsapp"></i>
-                                        Envoyer message
-                                    </a>
-                                    <a href="tel:+221781970844" class="action-btn phone">
-                                        <i class="fas fa-phone"></i>
-                                        Appeler
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -846,7 +959,7 @@
                             <div class="contact-details">
                                 <h3>Adresse</h3>
                                 <p>Rue Khalifa Ababacar Sy<br>Saint-Louis, Sénégal</p>
-                                <small>Au cœur de la ville historique</small>
+                                <small>Au cœur de la ville historique, proche de tous les sites d'intérêt</small>
                             </div>
                         </div>
                         
@@ -860,49 +973,32 @@
                                 <p>contact@hotelluxe.sn</p>
                                 <p>reservations@hotelluxe.sn</p>
                                 <div class="action-buttons">
-                                    <a href="mailto:contact@hotelluxe.sn" class="action-btn" style="background: var(--primary-color); color: white;">
+                                    <a href="mailto:contact@hotelluxe.sn" class="action-btn email">
                                         <i class="fas fa-envelope"></i>
-                                        Email
+                                        Envoyer Email
                                     </a>
                                 </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Horaires -->
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>Horaires</h3>
-                                <p>Réception: 24h/24</p>
-                                <p>Service conciergerie: 7j/7</p>
-                                <p>Restaurant: 6h30 - 23h</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Section WhatsApp prioritaire -->
                     <div class="whatsapp-section">
-                        <h3><i class="fab fa-whatsapp"></i> Contact WhatsApp Prioritaire</h3>
-                        <p>Pour une réponse immédiate et une réservation rapide :</p>
+                        <h3><i class="fab fa-whatsapp"></i> Contact WhatsApp Express</h3>
+                        <p>Pour une réponse immédiate et une réservation en moins de 5 minutes :</p>
                         <div class="whatsapp-number">+221 78 197 08 44</div>
-                        <p>Réservations express • Informations • Assistance</p>
+                        <p>Réservations • Informations • Assistance urgente</p>
                         <div class="action-buttons" style="justify-content: center;">
                             <a href="https://wa.me/221781970844" class="whatsapp-btn" target="_blank">
                                 <i class="fab fa-whatsapp"></i>
-                                Message WhatsApp
-                            </a>
-                            <a href="tel:+221781970844" class="action-btn phone">
-                                <i class="fas fa-phone"></i>
-                                Appeler
+                                Message WhatsApp Express
                             </a>
                         </div>
                     </div>
 
                     <!-- Réseaux sociaux -->
                     <div class="social-section">
-                        <h3>Suivez-nous sur les réseaux</h3>
+                        <h3>Suivez notre actualité</h3>
                         <div class="social-links">
                             <a href="#" class="social-link">
                                 <i class="fab fa-facebook-f"></i>
@@ -913,41 +1009,41 @@
                                 <span>Instagram</span>
                             </a>
                             <a href="#" class="social-link">
-                                <i class="fab fa-twitter"></i>
-                                <span>Twitter</span>
-                            </a>
-                            <a href="#" class="social-link">
                                 <i class="fab fa-tripadvisor"></i>
                                 <span>TripAdvisor</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-google"></i>
+                                <span>Google Business</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Formulaire de contact -->
-                <div class="contact-form-container">
+                <div class="contact-form-container fade-in">
                     <form class="contact-form" id="contactForm">
                         <h3>Envoyez-nous un message</h3>
                         
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="contactFirstName">Prénom *</label>
-                                <input type="text" id="contactFirstName" name="firstName" required>
+                                <input type="text" id="contactFirstName" name="firstName" required placeholder="Votre prénom">
                             </div>
                             <div class="form-group">
                                 <label for="contactLastName">Nom *</label>
-                                <input type="text" id="contactLastName" name="lastName" required>
+                                <input type="text" id="contactLastName" name="lastName" required placeholder="Votre nom">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="contactEmail">Email *</label>
-                                <input type="email" id="contactEmail" name="email" required>
+                                <input type="email" id="contactEmail" name="email" required placeholder="votre@email.com">
                             </div>
                             <div class="form-group">
                                 <label for="contactPhone">Téléphone *</label>
-                                <input type="tel" id="contactPhone" name="phone" required>
+                                <input type="tel" id="contactPhone" name="phone" required placeholder="+221 XX XXX XX XX">
                             </div>
                         </div>
 
@@ -1007,7 +1103,7 @@
         </div>
     </section>
 
-    <!-- Carte -->
+    <!-- Carte 
     <section class="map-section">
         <div class="container">
             <h2>Nous trouver</h2>
@@ -1031,7 +1127,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>  -->
 
     <!-- FAQ Section -->
     <section class="faq-section">
@@ -1044,7 +1140,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Le check-in est possible à partir de 15h et le check-out doit être effectué avant 12h. Un service de bagagerie est disponible si vous arrivez plus tôt ou repartez plus tard.</p>
+                        <p>Le check-in est possible à partir de 15h et le check-out doit être effectué avant 12h. Un service de bagagerie est disponible si vous arrivez plus tôt ou repartez plus tard. Pour les arrivées tardives, merci de nous prévenir à l'avance.</p>
                     </div>
                 </div>
                 
@@ -1054,41 +1150,52 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Oui, nous acceptons les animaux de compagnie (maximum 2 par chambre) avec un supplément de 15 000 FCFA par nuit. Merci de nous prévenir à l'avance.</p>
+                        <p>Oui, nous acceptons les animaux de compagnie (maximum 2 par chambre) avec un supplément de 15 000 FCFA par nuit. Merci de nous prévenir à l'avance pour que nous puissions préparer au mieux l'accueil de votre compagnon.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Y a-t-il un parking à l'hôtel ?</h3>
+                        <h3>Quels moyens de paiement acceptez-vous ?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Nous disposons d'un parking privé et sécurisé gratuit pour tous nos clients. Un service de valet est également disponible.</p>
+                        <p>Nous acceptons les cartes de crédit Visa, MasterCard, les espèces (FCFA, EUR, USD), les virements bancaires et les paiements mobiles (Orange Money, Free Money). Un acompte peut être demandé pour les réservations de groupes.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>Le petit-déjeuner est-il inclus ?</h3>
+                        <h3>Proposez-vous des services de navette depuis l'aéroport ?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Le petit-déjeuner n'est pas inclus par défaut mais peut être ajouté à votre réservation. Nous proposons un buffet continental et des spécialités sénégalaises.</p>
+                        <p>Oui, nous proposons un service de navette privée depuis l'aéroport de Saint-Louis sur réservation préalable. Le tarif est de 25 000 FCFA par trajet. Merci de nous communiquer vos informations de vol au moins 24h à l'avance.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Y a-t-il une piscine et un spa dans l'hôtel ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Notre établissement dispose d'une magnifique piscine extérieure chauffée, ouverte de 7h à 20h, et d'un spa proposant massages, soins du visage et soins bien-être. La réservation est recommandée pour les soins spa.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Proposez-vous des formules tout compris ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, nous proposons plusieurs formules : petit-déjeuner inclus, demi-pension et pension complète. Nous avons également des forfaits romantique, affaires et famille. Consultez notre page réservation ou contactez-nous pour plus de détails.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Boutons flottants -->
-    <a href="https://wa.me/221781970844" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <a href="tel:+221781970844" class="phone-float">
-        <i class="fas fa-phone"></i>
-    </a>
 
     <!-- Footer -->
     <footer>
@@ -1096,220 +1203,159 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Hôtel Luxe</h3>
-                    <p>Rue Khalifa Ababacar Sy<br>Saint-Louis, Sénégal</p>
+                    <p>Votre oasis de tranquillité au cœur de Saint-Louis. Expérience de luxe, service personnalisé et souvenirs inoubliables.</p>
+                    <div class="social-links small">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                        <a href="#"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rue Khalifa Ababacar Sy, Saint-Louis</p>
                     <p><i class="fas fa-phone"></i> +221 33 123 45 67</p>
+                    <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
                     <p><i class="fas fa-envelope"></i> contact@hotelluxe.sn</p>
                 </div>
+                
                 <div class="footer-section">
                     <h3>Liens rapides</h3>
                     <ul>
                         <li><a href="index.html">Accueil</a></li>
                         <li><a href="apropos.html">À propos</a></li>
                         <li><a href="reservation.html">Réservation</a></li>
-                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-section">
-                    <h3>Contact direct</h3>
-                    <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
-                    <p><i class="fas fa-phone"></i> +221 33 123 45 67</p>
-                    <p>Disponible 24h/24</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Suivez-nous</h3>
-                    <div class="social-links small">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
-                    </div>
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Chambres & Suites</a></li>
+                        <li><a href="#">Restaurant & Bar</a></li>
+                        <li><a href="#">Spa & Bien-être</a></li>
+                        <li><a href="#">Salles de réunion</a></li>
+                        <li><a href="#">Événements</a></li>
+                    </ul>
                 </div>
             </div>
+            
             <div class="copyright">
-                <p>&copy; 2024 Hôtel Luxe. Tous droits réservés.</p>
+                <p>&copy; 2023 Hôtel Luxe. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Boutons flottants 
+    <a href="https://wa.me/221781970844" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <a href="tel:+221781970844" class="phone-float">
+        <i class="fas fa-phone"></i>
+    </a> -->
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Votre message a été envoyé avec succès !
+    </div>
+
     <script>
-        // Gestion du menu responsive
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const mainNav = document.getElementById('mainNav');
-            
-            if (menuToggle && mainNav) {
-                menuToggle.addEventListener('click', function() {
-                    mainNav.classList.toggle('active');
-                    menuToggle.innerHTML = mainNav.classList.contains('active') ? 
-                        '<i class="fas fa-times"></i>' : 
-                        '<i class="fas fa-bars"></i>';
-                });
-            }
+        // Menu mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').querySelector('ul').classList.toggle('active');
+        });
 
-            // Compteur de caractères pour le message
-            const messageTextarea = document.getElementById('contactMessage');
-            const charCount = document.getElementById('messageCharCount');
-            
-            if (messageTextarea && charCount) {
-                messageTextarea.addEventListener('input', function() {
-                    charCount.textContent = this.value.length;
+        // FAQ Accordéon
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // Fermer toutes les réponses
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('active');
                 });
-            }
-
-            // Gestion des FAQ
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', function() {
-                    const answer = this.nextElementSibling;
-                    const isActive = answer.classList.contains('active');
-                    
-                    // Fermer toutes les réponses
-                    document.querySelectorAll('.faq-answer').forEach(ans => {
-                        ans.classList.remove('active');
-                    });
-                    
-                    // Ouvrir la réponse cliquée si elle n'était pas active
-                    if (!isActive) {
-                        answer.classList.add('active');
-                    }
-                });
+                
+                // Ouvrir la réponse cliquée si elle n'était pas active
+                if (!isActive) {
+                    answer.classList.add('active');
+                }
             });
+        });
 
-            // Gestion des options d'envoi
-            const deliveryButtons = document.querySelectorAll('.delivery-btn');
-            let selectedDelivery = 'email'; // Par défaut
+        // Compteur de caractères
+        const messageTextarea = document.getElementById('contactMessage');
+        const charCount = document.getElementById('messageCharCount');
+        
+        messageTextarea.addEventListener('input', () => {
+            charCount.textContent = messageTextarea.value.length;
+        });
 
-            deliveryButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Retirer la sélection précédente
-                    deliveryButtons.forEach(btn => btn.classList.remove('selected'));
-                    
-                    // Ajouter la nouvelle sélection
-                    this.classList.add('selected');
-                    selectedDelivery = this.getAttribute('data-delivery');
+        // Sélection des options de livraison
+        document.querySelectorAll('.delivery-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.delivery-btn').forEach(b => {
+                    b.classList.remove('selected');
                 });
+                btn.classList.add('selected');
             });
+        });
 
-            // Sélectionner email par défaut
-            document.querySelector('.delivery-btn[data-delivery="email"]').classList.add('selected');
-
-            // Gestion du formulaire de contact
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Récupérer les données du formulaire
-                    const formData = {
-                        firstName: document.getElementById('contactFirstName').value,
-                        lastName: document.getElementById('contactLastName').value,
-                        email: document.getElementById('contactEmail').value,
-                        phone: document.getElementById('contactPhone').value,
-                        subject: document.getElementById('contactSubject').value,
-                        message: document.getElementById('contactMessage').value,
-                        newsletter: document.getElementById('newsletter').checked,
-                        delivery: selectedDelivery
-                    };
-
-                    // Validation basique
-                    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.subject || !formData.message) {
-                        alert('Veuillez remplir tous les champs obligatoires.');
-                        return;
-                    }
-
-                    // Préparer le message selon le mode d'envoi
-                    let finalMessage = '';
-                    
-                    if (selectedDelivery === 'whatsapp') {
-                        // Préparer le message pour WhatsApp
-                        finalMessage = `Nouveau message de ${formData.firstName} ${formData.lastName}:
-
-📞 Téléphone: ${formData.phone}
-📧 Email: ${formData.email}
-📋 Sujet: ${formData.subject}
-
-💬 Message:
-${formData.message}
-
-${formData.newsletter ? '✅ Souhaite recevoir la newsletter' : '❌ Ne souhaite pas recevoir la newsletter'}`;
-
-                        // Encoder le message pour WhatsApp
-                        const encodedMessage = encodeURIComponent(finalMessage);
-                        const whatsappUrl = `https://wa.me/221781970844?text=${encodedMessage}`;
-                        
-                        // Ouvrir WhatsApp
-                        window.open(whatsappUrl, '_blank');
-                        
-                        // Afficher un message de confirmation
-                        alert('Votre message a été préparé pour WhatsApp. Vous allez être redirigé vers WhatsApp pour l\'envoyer.');
-                        
-                    } else if (selectedDelivery === 'phone') {
-                        // Préparer pour un appel téléphonique
-                        const phoneNumber = '221781970844';
-                        window.location.href = `tel:${phoneNumber}`;
-                        
-                    } else {
-                        // Préparer le message pour l'email (simulation)
-                        finalMessage = `Destinataire: contact@hotelluxe.sn
-Sujet: ${formData.subject} - Message de ${formData.firstName} ${formData.lastName}
-
-De: ${formData.firstName} ${formData.lastName}
-Email: ${formData.email}
-Téléphone: ${formData.phone}
-
-Message:
-${formData.message}
-
-Newsletter: ${formData.newsletter ? 'Oui' : 'Non'}`;
-
-                        // Simuler l'envoi par email
-                        console.log('Message à envoyer par email:', finalMessage);
-                        
-                        // Afficher un message de confirmation
-                        alert('Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
-                        
-                        // Réinitialiser le formulaire
-                        contactForm.reset();
-                        document.getElementById('messageCharCount').textContent = '0';
-                        document.querySelector('.delivery-btn[data-delivery="email"]').classList.add('selected');
-                        document.querySelectorAll('.delivery-btn:not([data-delivery="email"])').forEach(btn => {
-                            btn.classList.remove('selected');
-                        });
-                    }
-
-                    // Sauvegarder le message dans le localStorage (pour historique)
-                    const contactMessages = JSON.parse(localStorage.getItem('hotelContactMessages')) || [];
-                    contactMessages.push({
-                        ...formData,
-                        timestamp: new Date().toISOString(),
-                        id: Date.now()
-                    });
-                    localStorage.setItem('hotelContactMessages', JSON.stringify(contactMessages));
-                });
-            }
-
-            // Détection du device pour optimiser les appels
-            function isMobileDevice() {
-                return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-            }
-
-            // Optimiser les liens d'appel pour mobile
-            if (isMobileDevice()) {
-                console.log('Appareil mobile détecté - optimisation des liens d\'appel');
+        // Soumission du formulaire
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validation simple
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = 'red';
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+            
+            if (isValid) {
+                // Simulation d'envoi
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Réinitialiser le formulaire
+                this.reset();
+                charCount.textContent = '0';
+                
+                // Masquer la notification après 5 secondes
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 5000);
             }
         });
 
-        // Fonction pour tester les liens (pour développement)
-        function testPhoneLink(phoneNumber) {
-            alert(`Test d'appel: ${phoneNumber}\nSur mobile, cela ouvrira l'appel téléphonique.`);
-            return true;
-        }
+        // Animation au défilement
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-        function testWhatsAppLink(phoneNumber) {
-            alert(`Test WhatsApp: ${phoneNumber}\nCela ouvrira WhatsApp avec le numéro pré-rempli.`);
-            return true;
-        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-in forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observer les éléments à animer
+        document.querySelectorAll('.contact-method, .contact-form-container, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>

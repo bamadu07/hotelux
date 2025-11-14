@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réservation - Hôtel Luxe</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Variables CSS */
@@ -36,13 +39,6 @@
             background-color: var(--light-bg);
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
         /* Header */
         header {
             background: var(--lighter-bg);
@@ -53,12 +49,6 @@
             right: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .logo {
@@ -72,31 +62,18 @@
             color: var(--primary-color);
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav ul li a {
+        .navbar-nav .nav-link {
             color: var(--text-dark);
-            text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
             padding: 0.5rem 1rem;
             border-radius: 25px;
         }
 
-        nav ul li a:hover,
-        nav ul li a.active {
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
             color: var(--primary-color);
             background: rgba(42, 157, 143, 0.1);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
         }
 
         /* Currency Selector */
@@ -140,7 +117,7 @@
             color: white;
             padding: 120px 0 80px;
             text-align: center;
-            margin-top: 70px;
+            margin-top: 76px;
         }
 
         .page-header h1 {
@@ -172,13 +149,6 @@
             background: var(--lighter-bg);
         }
 
-        .reservation-type-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
         .type-card {
             background: white;
             padding: 2.5rem;
@@ -190,6 +160,7 @@
             border: 3px solid transparent;
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
 
         .type-card::before {
@@ -247,6 +218,18 @@
             line-height: 1.6;
         }
 
+        .type-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .type-price-fcfa {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
         .type-badge {
             background: var(--gold-color);
             color: white;
@@ -255,6 +238,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             display: inline-block;
+            margin-top: 1rem;
         }
 
         /* Formulaire de Réservation */
@@ -288,12 +272,6 @@
             font-size: 1.3rem;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -325,12 +303,6 @@
         }
 
         /* Options de chambre */
-        .room-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
         .room-option {
             background: var(--light-bg);
             padding: 1.5rem;
@@ -338,6 +310,7 @@
             cursor: pointer;
             transition: var(--transition);
             border: 2px solid transparent;
+            height: 100%;
         }
 
         .room-option:hover,
@@ -362,6 +335,7 @@
             display: flex;
             gap: 0.5rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
         .room-features span {
@@ -386,13 +360,6 @@
         }
 
         /* Options petit-déjeuner */
-        .breakfast-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
         .breakfast-option {
             background: var(--light-bg);
             padding: 1.5rem;
@@ -401,6 +368,7 @@
             transition: var(--transition);
             border: 2px solid transparent;
             text-align: center;
+            height: 100%;
         }
 
         .breakfast-option:hover,
@@ -423,6 +391,12 @@
         .breakfast-price {
             font-weight: 600;
             color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        .breakfast-price-fcfa {
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
 
         /* Récapitulatif du prix */
@@ -431,7 +405,6 @@
             padding: 2rem;
             border-radius: var(--border-radius);
             margin: 2rem 0;
-            display: none;
         }
 
         .price-summary h3 {
@@ -441,7 +414,7 @@
         }
 
         .price-details {
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
@@ -454,7 +427,7 @@
 
         .price-row.total {
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--accent-color);
             border-bottom: none;
             border-top: 2px solid var(--primary-color);
@@ -467,102 +440,67 @@
             font-weight: 600;
         }
 
-        /* Confirmation WhatsApp */
-        .whatsapp-confirmation {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            margin: 3rem 0;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-            border: 2px solid #25D366;
-        }
-
-        .whatsapp-confirmation h3 {
+        .price-details-section {
             margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed var(--border-color);
         }
 
-        .whatsapp-confirmation .whatsapp-number {
-            font-size: 1.4rem;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
-            margin: 1rem 0;
-            display: inline-block;
-        }
-
-        .whatsapp-btn {
-            background: white;
-            color: #25D366;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 1rem;
-            transition: var(--transition);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .whatsapp-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            color: #128C7E;
-        }
-
-        /* Étapes de confirmation */
-        .confirmation-steps {
-            background: var(--light-bg);
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            margin: 2rem 0;
-            border-left: 5px solid var(--primary-color);
-        }
-
-        .confirmation-steps h4 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .steps-list {
-            list-style: none;
-        }
-
-        .steps-list li {
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .steps-list li:last-child {
+        .price-details-section:last-child {
             border-bottom: none;
         }
 
-        .step-number {
-            background: var(--primary-color);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+        /* Options de confirmation */
+        .confirmation-options {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+        }
+
+        .confirmation-options h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .confirmation-method {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 2px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .confirmation-method:hover,
+        .confirmation-method.selected {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .confirmation-method i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .confirmation-method.whatsapp i {
+            color: #25D366;
+        }
+
+        .confirmation-method.email i {
+            color: var(--primary-color);
+        }
+
+        .confirmation-method h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .confirmation-method p {
+            color: var(--text-light);
             font-size: 0.9rem;
         }
 
@@ -591,6 +529,27 @@
             transform: translateY(-2px);
         }
 
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
         .btn-large {
             padding: 1.2rem 3rem;
             font-size: 1.1rem;
@@ -614,13 +573,6 @@
             padding: 3rem 0 1rem;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
         .footer-section h3 {
             margin-bottom: 1rem;
             color: var(--primary-color);
@@ -633,6 +585,7 @@
 
         .footer-section ul {
             list-style: none;
+            padding-left: 0;
         }
 
         .footer-section ul li {
@@ -708,32 +661,9 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            nav ul {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--lighter-bg);
-                flex-direction: column;
-                padding: 2rem;
-                transform: translateY(-100%);
-                opacity: 0;
-                transition: var(--transition);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-
-            nav ul.active {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
             .page-header {
                 padding: 100px 0 60px;
-                margin-top: 60px;
+                margin-top: 66px;
             }
 
             .page-header h1 {
@@ -742,18 +672,6 @@
 
             .reservation-form {
                 padding: 2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .reservation-type-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .room-options {
-                grid-template-columns: 1fr;
             }
 
             .currency-selector {
@@ -768,27 +686,71 @@
                 bottom: 1rem;
                 right: 1rem;
             }
+
+            .navbar-collapse {
+                background: var(--lighter-bg);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .type-card,
+            .room-option,
+            .breakfast-option,
+            .confirmation-method {
+                margin-bottom: 1.5rem;
+            }
+
+            .btn-large {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="container header-container">
-            <a href="index.html" class="logo">Hôtel<span>Luxe</span></a>
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a href="index.html" class="logo">Hôtel<span>Luxe</span></a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="apropos.html" class="nav-link">À propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reservation.html" class="nav-link active">Réservation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="tableau-de-bord.html" class="nav-link">Tableau de bord</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <nav id="mainNav">
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="apropos.html">À propos</a></li>
-                    <li><a href="reservation.html" class="active">Réservation</a></li>
-                    <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+        </nav>
     </header>
 
     <!-- Currency Selector -->
@@ -812,35 +774,47 @@
     <!-- Type de réservation -->
     <section class="reservation-type">
         <div class="container">
-            <h2 style="text-align: center; color: var(--accent-color); margin-bottom: 1rem;">Type de Réservation</h2>
-            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">Sélectionnez la formule qui correspond à vos besoins</p>
+            <h2 class="text-center text-accent mb-3">Type de Réservation</h2>
+            <p class="text-center text-muted mb-5">Sélectionnez la formule qui correspond à vos besoins</p>
             
-            <div class="reservation-type-grid">
-                <div class="type-card" data-type="nuit" data-base-price="120">
-                    <div class="type-icon">
-                        <i class="fas fa-moon"></i>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="type-card selected" data-type="nuit" data-base-price="120">
+                        <div class="type-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h3>Nuitée Complète</h3>
+                        <p>Profitez d'un séjour complet avec check-in à partir de 14h et check-out jusqu'à 12h</p>
+                        <div class="type-price">120€ / nuit</div>
+                        <div class="type-price-fcfa">78 600 FCFA / nuit</div>
+                        <div class="type-badge">Formule Classique</div>
                     </div>
-                    <h3>Nuitée Complète</h3>
-                    <p>Profitez d'un séjour complet avec check-in à partir de 14h et check-out jusqu'à 12h</p>
-                    <div class="type-badge">Formule Classique</div>
                 </div>
                 
-                <div class="type-card" data-type="journee" data-base-price="80">
-                    <div class="type-icon">
-                        <i class="fas fa-sun"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="type-card" data-type="journee" data-base-price="80">
+                        <div class="type-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <h3>Réservation Journée</h3>
+                        <p>Utilisez la chambre de 8h à 18h - Parfait pour les escales ou réunions d'affaires</p>
+                        <div class="type-price">80€ / journée</div>
+                        <div class="type-price-fcfa">52 400 FCFA / journée</div>
+                        <div class="type-badge">Économique</div>
                     </div>
-                    <h3>Réservation Journée</h3>
-                    <p>Utilisez la chambre de 8h à 18h - Parfait pour les escales ou réunions d'affaires</p>
-                    <div class="type-badge">Économique</div>
                 </div>
                 
-                <div class="type-card" data-type="dejeuner" data-base-price="150">
-                    <div class="type-icon">
-                        <i class="fas fa-coffee"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="type-card" data-type="dejeuner" data-base-price="150">
+                        <div class="type-icon">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <h3>Nuitée + Petit-déjeuner</h3>
+                        <p>Séjour complet avec petit-déjeuner buffet inclus pour un réveil gourmand</p>
+                        <div class="type-price">150€ / nuit</div>
+                        <div class="type-price-fcfa">98 250 FCFA / nuit</div>
+                        <div class="type-badge">Plus Populaire</div>
                     </div>
-                    <h3>Nuitée + Petit-déjeuner</h3>
-                    <p>Séjour complet avec petit-déjeuner buffet inclus pour un réveil gourmand</p>
-                    <div class="type-badge">Plus Populaire</div>
                 </div>
             </div>
         </div>
@@ -852,89 +826,108 @@
             <form class="reservation-form" id="bookingForm">
                 <input type="hidden" id="reservationType" name="reservationType" value="nuit">
                 <input type="hidden" id="basePrice" name="basePrice" value="120">
+                <input type="hidden" id="confirmationMethod" name="confirmationMethod" value="whatsapp">
 
                 <div class="form-section">
                     <h3><i class="fas fa-calendar-alt"></i> Dates du séjour</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="checkin">Date d'arrivée</label>
-                            <input type="date" id="checkin" name="checkin" required>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="checkin">Date d'arrivée</label>
+                                <input type="date" id="checkin" name="checkin" required class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="checkout" id="checkoutLabel">Date de départ</label>
-                            <input type="date" id="checkout" name="checkout" required>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="checkout" id="checkoutLabel">Date de départ</label>
+                                <input type="date" id="checkout" name="checkout" required class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group" id="dayUseTime" style="display: none;">
                         <label for="dayUseHours">Heures d'utilisation (8h - 18h)</label>
-                        <input type="text" id="dayUseHours" value="8h - 18h" readonly style="background: var(--light-bg);">
+                        <input type="text" id="dayUseHours" value="8h - 18h" readonly class="form-control" style="background: var(--light-bg);">
                     </div>
                 </div>
 
                 <div class="form-section">
                     <h3><i class="fas fa-users"></i> Invités</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="adults">Adultes</label>
-                            <select id="adults" name="adults" required>
-                                <option value="1">1 Adulte</option>
-                                <option value="2" selected>2 Adultes</option>
-                                <option value="3">3 Adultes</option>
-                                <option value="4">4 Adultes</option>
-                            </select>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="adults">Adultes</label>
+                                <select id="adults" name="adults" required class="form-select">
+                                    <option value="1">1 Adulte</option>
+                                    <option value="2" selected>2 Adultes</option>
+                                    <option value="3">3 Adultes</option>
+                                    <option value="4">4 Adultes</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="children">Enfants</label>
-                            <select id="children" name="children">
-                                <option value="0" selected>Aucun</option>
-                                <option value="1">1 Enfant</option>
-                                <option value="2">2 Enfants</option>
-                                <option value="3">3 Enfants</option>
-                            </select>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="children">Enfants</label>
+                                <select id="children" name="children" class="form-select">
+                                    <option value="0" selected>Aucun</option>
+                                    <option value="1">1 Enfant</option>
+                                    <option value="2">2 Enfants</option>
+                                    <option value="3">3 Enfants</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-section">
                     <h3><i class="fas fa-bed"></i> Type de chambre</h3>
-                    <div class="room-options">
-                        <div class="room-option" data-type="standard" data-price="0">
-                            <div class="room-info">
-                                <h4>Chambre Standard</h4>
-                                <p>Confort et élégance dans un espace raffiné de 25m²</p>
-                                <div class="room-features">
-                                    <span><i class="fas fa-wifi"></i> Wi-Fi</span>
-                                    <span><i class="fas fa-tv"></i> TV</span>
-                                    <span><i class="fas fa-snowflake"></i> Climatisation</span>
+                    <div class="row g-3">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="room-option selected" data-type="standard" data-price="0">
+                                <div class="room-info">
+                                    <h4>Chambre Standard</h4>
+                                    <p>Confort et élégance dans un espace raffiné de 25m²</p>
+                                    <div class="room-features">
+                                        <span><i class="fas fa-wifi"></i> Wi-Fi</span>
+                                        <span><i class="fas fa-tv"></i> TV</span>
+                                        <span><i class="fas fa-snowflake"></i> Climatisation</span>
+                                        <span><i class="fas fa-shower"></i> Salle de bain</span>
+                                    </div>
                                 </div>
+                                <div class="room-price">Inclus</div>
+                                <div class="room-price-fcfa">Inclus</div>
                             </div>
-                            <div class="room-price">Inclus</div>
                         </div>
-                        <div class="room-option" data-type="deluxe" data-price="30">
-                            <div class="room-info">
-                                <h4>Chambre Deluxe</h4>
-                                <p>Espace généreux de 35m² avec vue partielle sur la ville</p>
-                                <div class="room-features">
-                                    <span><i class="fas fa-wifi"></i> Wi-Fi</span>
-                                    <span><i class="fas fa-tv"></i> TV écran plat</span>
-                                    <span><i class="fas fa-couch"></i> Salon</span>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="room-option" data-type="deluxe" data-price="30">
+                                <div class="room-info">
+                                    <h4>Chambre Deluxe</h4>
+                                    <p>Espace généreux de 35m² avec vue partielle sur la ville</p>
+                                    <div class="room-features">
+                                        <span><i class="fas fa-wifi"></i> Wi-Fi</span>
+                                        <span><i class="fas fa-tv"></i> TV écran plat</span>
+                                        <span><i class="fas fa-couch"></i> Salon</span>
+                                        <span><i class="fas fa-coffee"></i> Machine à café</span>
+                                    </div>
                                 </div>
+                                <div class="room-price">+30€ / nuit</div>
+                                <div class="room-price-fcfa">+19 650 FCFA / nuit</div>
                             </div>
-                            <div class="room-price">+30€</div>
-                            <div class="room-price-fcfa">+19 650 FCFA</div>
                         </div>
-                        <div class="room-option" data-type="suite" data-price="60">
-                            <div class="room-info">
-                                <h4>Suite</h4>
-                                <p>Suite spacieuse de 50m² avec salon et vue exceptionnelle</p>
-                                <div class="room-features">
-                                    <span><i class="fas fa-wifi"></i> Wi-Fi premium</span>
-                                    <span><i class="fas fa-hot-tub"></i> Jacuzzi</span>
-                                    <span><i class="fas fa-umbrella-beach"></i> Vue mer</span>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="room-option" data-type="suite" data-price="60">
+                                <div class="room-info">
+                                    <h4>Suite</h4>
+                                    <p>Suite spacieuse de 50m² avec salon et vue exceptionnelle</p>
+                                    <div class="room-features">
+                                        <span><i class="fas fa-wifi"></i> Wi-Fi premium</span>
+                                        <span><i class="fas fa-hot-tub"></i> Jacuzzi</span>
+                                        <span><i class="fas fa-umbrella-beach"></i> Vue mer</span>
+                                        <span><i class="fas fa-concierge-bell"></i> Service VIP</span>
+                                    </div>
                                 </div>
+                                <div class="room-price">+60€ / nuit</div>
+                                <div class="room-price-fcfa">+39 300 FCFA / nuit</div>
                             </div>
-                            <div class="room-price">+60€</div>
-                            <div class="room-price-fcfa">+39 300 FCFA</div>
                         </div>
                     </div>
                     <input type="hidden" id="roomType" name="roomType" value="standard">
@@ -944,23 +937,30 @@
                 <!-- Options petit-déjeuner (uniquement pour les nuitées) -->
                 <div class="form-section" id="breakfastSection">
                     <h3><i class="fas fa-coffee"></i> Options petit-déjeuner</h3>
-                    <div class="breakfast-options">
-                        <div class="breakfast-option" data-type="sans" data-price="0">
-                            <h5>Sans petit-déjeuner</h5>
-                            <p>Profitez de votre séjour sans repas inclus</p>
-                            <div class="breakfast-price">Inclus</div>
+                    <div class="row g-3">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="breakfast-option selected" data-type="sans" data-price="0">
+                                <h5>Sans petit-déjeuner</h5>
+                                <p>Profitez de votre séjour sans repas inclus</p>
+                                <div class="breakfast-price">Inclus</div>
+                                <div class="breakfast-price-fcfa">Inclus</div>
+                            </div>
                         </div>
-                        <div class="breakfast-option" data-type="continental" data-price="15">
-                            <h5>Petit-déjeuner Continental</h5>
-                            <p>Café, thé, jus, viennoiseries, fruits</p>
-                            <div class="breakfast-price">+15€ / personne</div>
-                            <div class="room-price-fcfa">+9 825 FCFA / personne</div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="breakfast-option" data-type="continental" data-price="15">
+                                <h5>Petit-déjeuner Continental</h5>
+                                <p>Café, thé, jus, viennoiseries, fruits</p>
+                                <div class="breakfast-price">+15€ / personne</div>
+                                <div class="breakfast-price-fcfa">+9 825 FCFA / personne</div>
+                            </div>
                         </div>
-                        <div class="breakfast-option" data-type="buffet" data-price="25">
-                            <h5>Buffet complet</h5>
-                            <p>Buffet varié avec options chaudes et froides</p>
-                            <div class="breakfast-price">+25€ / personne</div>
-                            <div class="room-price-fcfa">+16 375 FCFA / personne</div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="breakfast-option" data-type="buffet" data-price="25">
+                                <h5>Buffet complet</h5>
+                                <p>Buffet varié avec options chaudes et froides</p>
+                                <div class="breakfast-price">+25€ / personne</div>
+                                <div class="breakfast-price-fcfa">+16 375 FCFA / personne</div>
+                            </div>
                         </div>
                     </div>
                     <input type="hidden" id="breakfastType" name="breakfastType" value="sans">
@@ -969,63 +969,87 @@
 
                 <!-- Récapitulatif du prix -->
                 <div class="price-summary" id="priceSummary">
-                    <h3>Récapitulatif de votre réservation</h3>
+                    <h3><i class="fas fa-receipt"></i> Récapitulatif de votre réservation</h3>
                     <div class="price-details">
-                        <div class="price-row">
-                            <span>Type de réservation:</span>
-                            <span id="reservationTypeDisplay">Nuitée Complète</span>
+                        <div class="price-details-section">
+                            <div class="price-row">
+                                <span>Type de réservation:</span>
+                                <span id="reservationTypeDisplay">Nuitée Complète</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Durée:</span>
+                                <span id="durationDisplay">1 nuit</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Chambre:</span>
+                                <span id="roomTypeDisplay">Standard</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Petit-déjeuner:</span>
+                                <span id="breakfastDisplay">Sans</span>
+                            </div>
                         </div>
-                        <div class="price-row">
-                            <span>Durée:</span>
-                            <span id="durationDisplay">1 nuit</span>
+
+                        <div class="price-details-section">
+                            <div class="price-row">
+                                <span>Prix de base:</span>
+                                <span id="basePriceDisplay">120€</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Supplément chambre:</span>
+                                <span id="roomExtraDisplay">0€</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Supplément petit-déjeuner:</span>
+                                <span id="breakfastExtraDisplay">0€</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Nombre de nuits:</span>
+                                <span id="nightsCountDisplay">1</span>
+                            </div>
                         </div>
-                        <div class="price-row">
-                            <span>Chambre:</span>
-                            <span id="roomTypeDisplay">Standard</span>
-                        </div>
-                        <div class="price-row">
-                            <span>Petit-déjeuner:</span>
-                            <span id="breakfastDisplay">Sans</span>
-                        </div>
-                        <div class="price-row">
-                            <span>Supplément chambre:</span>
-                            <span id="roomExtraDisplay">0€</span>
-                        </div>
-                        <div class="price-row">
-                            <span>Supplément petit-déjeuner:</span>
-                            <span id="breakfastExtraDisplay">0€</span>
-                        </div>
-                        <div class="price-row total">
-                            <span>Total:</span>
-                            <span id="totalPrice">120€</span>
-                        </div>
-                        <div class="price-row total price-fcfa">
-                            <span>Total en FCFA:</span>
-                            <span id="totalPriceFcfa">78 600 FCFA</span>
+
+                        <div class="price-details-section">
+                            <div class="price-row total">
+                                <span>Total:</span>
+                                <span id="totalPrice">120€</span>
+                            </div>
+                            <div class="price-row total price-fcfa">
+                                <span>Total en FCFA:</span>
+                                <span id="totalPriceFcfa">78 600 FCFA</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-section">
                     <h3><i class="fas fa-user-circle"></i> Informations personnelles</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">Prénom</label>
-                            <input type="text" id="firstName" name="firstName" required>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName">Prénom</label>
+                                <input type="text" id="firstName" name="firstName" required class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="lastName">Nom</label>
-                            <input type="text" id="lastName" name="lastName" required>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lastName">Nom</label>
+                                <input type="text" id="lastName" name="lastName" required class="form-control">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Téléphone</label>
-                            <input type="tel" id="phone" name="phone" required>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Téléphone</label>
+                                <input type="tel" id="phone" name="phone" required class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1033,49 +1057,53 @@
                 <div class="form-section">
                     <h3><i class="fas fa-comment-alt"></i> Demandes spéciales</h3>
                     <div class="form-group">
-                        <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Préférences alimentaires, accessibilité, célébration spéciale, heure d'arrivée approximative..."></textarea>
+                        <textarea id="specialRequests" name="specialRequests" rows="4" class="form-control" placeholder="Préférences alimentaires, accessibilité, célébration spéciale, heure d'arrivée approximative..."></textarea>
                     </div>
                 </div>
 
-                <!-- Section confirmation WhatsApp -->
-                <div class="whatsapp-confirmation">
-                    <h3><i class="fab fa-whatsapp"></i> Confirmation par WhatsApp</h3>
-                    <p>Pour finaliser votre réservation, contactez-nous sur WhatsApp :</p>
-                    <div class="whatsapp-number">+221 78 197 08 44</div>
-                    <p>Envoyez-nous vos informations de réservation pour confirmation immédiate</p>
-                    <a href="https://wa.me/221781970844?text=Bonjour%20Hôtel%20Luxe,%20je%20souhaite%20confirmer%20ma%20réservation" 
-                       class="whatsapp-btn pulse" target="_blank" id="whatsappBtn">
-                        <i class="fab fa-whatsapp"></i>
-                        Confirmer sur WhatsApp
-                    </a>
+                <!-- Options de confirmation -->
+                <div class="confirmation-options">
+                    <h3><i class="fas fa-check-circle"></i> Méthode de confirmation</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="confirmation-method whatsapp selected" data-method="whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <h4>Confirmation WhatsApp</h4>
+                                <p>Recevez une confirmation immédiate via WhatsApp</p>
+                                <small>Numéro: +221 78 197 08 44</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="confirmation-method email" data-method="email">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Confirmation Email</h4>
+                                <p>Recevez un email de confirmation détaillé</p>
+                                <small>Avec tous les détails de votre réservation</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Étapes de confirmation -->
-                <div class="confirmation-steps">
-                    <h4><i class="fas fa-list-check"></i> Étapes de confirmation</h4>
-                    <ul class="steps-list">
-                        <li>
-                            <div class="step-number">1</div>
-                            <div>Remplissez le formulaire de réservation</div>
-                        </li>
-                        <li>
-                            <div class="step-number">2</div>
-                            <div>Cliquez sur "Confirmer sur WhatsApp"</div>
-                        </li>
-                        <li>
-                            <div class="step-number">3</div>
-                            <div>Envoyez vos informations via WhatsApp</div>
-                        </li>
-                        <li>
-                            <div class="step-number">4</div>
-                            <div>Recevez votre confirmation par retour</div>
-                        </li>
-                    </ul>
+                <div class="form-section">
+                    <h3><i class="fas fa-list-check"></i> Finalisation</h3>
+                    <div class="form-group">
+                        <p class="text-muted mb-3">
+                            Votre réservation sera enregistrée dans votre tableau de bord et vous recevrez une confirmation par votre méthode choisie.
+                        </p>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-primary btn-large w-100">
+                                <i class="fas fa-check"></i> Confirmer la réservation
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="tableau-de-bord.html" class="btn btn-outline btn-large w-100">
+                                <i class="fas fa-tachometer-alt"></i> Tableau de bord
+                            </a>
+                        </div>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
-                    <i class="fas fa-paper-plane"></i> Préparer la réservation
-                </button>
             </form>
         </div>
     </section>
@@ -1088,37 +1116,46 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Hôtel Luxe</h3>
-                    <p>123 Avenue des Champs-Élysées<br>75008 Paris, France</p>
-                    <p><i class="fas fa-phone"></i> +33 1 23 45 67 89</p>
-                    <p><i class="fas fa-envelope"></i> contact@hotelluxe.com</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Liens rapides</h3>
-                    <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="apropos.html">À propos</a></li>
-                        <li><a href="reservation.html">Réservation</a></li>
-                        <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Suivez-nous</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3>Hôtel Luxe</h3>
+                        <p>Rue Khalifa Ababacar Sy<br>Saint-Louis, Sénégal</p>
+                        <small>Au cœur de la ville historique</small>
+                        <p><i class="fas fa-phone"></i> +221 33 123 45 67</p>
+                        <p><i class="fas fa-envelope"></i> contact@hotelluxe.sn</p>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Contact WhatsApp</h3>
-                    <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
-                    <p>Réservations et informations</p>
-                    <p>Disponible 24h/24</p>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3>Liens rapides</h3>
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="apropos.html">À propos</a></li>
+                            <li><a href="reservation.html">Réservation</a></li>
+                            <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3>Suivez-nous</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3>Contact WhatsApp</h3>
+                        <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
+                        <p>Réservations et informations</p>
+                        <p>Disponible 24h/24</p>
+                    </div>
                 </div>
             </div>
             <div class="copyright">
@@ -1127,10 +1164,15 @@
         </div>
     </footer>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Le reste du JavaScript reste inchangé -->
     <script>
         // Taux de conversion EUR vers FCFA
         const EUR_TO_XOF_RATE = 655;
         let currentCurrency = 'EUR';
+        const WHATSAPP_NUMBER = '221781970844';
 
         document.addEventListener('DOMContentLoaded', function() {
             // Gestion du changement de devise
@@ -1164,12 +1206,18 @@
                     // Mettre à jour l'interface selon le type
                     updateReservationTypeUI(reservationType);
                     updatePriceCalculation();
-                    updateWhatsAppLink();
                 });
             });
 
-            // Sélectionner la nuitée par défaut
-            document.querySelector('.type-card[data-type="nuit"]').classList.add('selected');
+            // Gestion des méthodes de confirmation
+            const confirmationMethods = document.querySelectorAll('.confirmation-method');
+            confirmationMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    confirmationMethods.forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    document.getElementById('confirmationMethod').value = this.dataset.method;
+                });
+            });
 
             // Gestion des chambres
             const roomOptions = document.querySelectorAll('.room-option');
@@ -1182,7 +1230,6 @@
                     document.getElementById('roomExtra').value = this.dataset.price;
                     
                     updatePriceCalculation();
-                    updateWhatsAppLink();
                 });
             });
 
@@ -1197,13 +1244,8 @@
                     document.getElementById('breakfastExtra').value = this.dataset.price;
                     
                     updatePriceCalculation();
-                    updateWhatsAppLink();
                 });
             });
-
-            // Sélectionner les options par défaut
-            document.querySelector('.room-option[data-type="standard"]').classList.add('selected');
-            document.querySelector('.breakfast-option[data-type="sans"]').classList.add('selected');
 
             // Mettre à jour l'interface selon le type de réservation
             function updateReservationTypeUI(type) {
@@ -1234,13 +1276,25 @@
             function updateCurrencyDisplay(currency) {
                 const roomPrices = document.querySelectorAll('.room-price');
                 const roomPricesFcfa = document.querySelectorAll('.room-price-fcfa');
+                const breakfastPrices = document.querySelectorAll('.breakfast-price');
+                const breakfastPricesFcfa = document.querySelectorAll('.breakfast-price-fcfa');
+                const typePrices = document.querySelectorAll('.type-price');
+                const typePricesFcfa = document.querySelectorAll('.type-price-fcfa');
                 
                 if (currency === 'EUR') {
                     roomPrices.forEach(price => price.style.display = 'block');
                     roomPricesFcfa.forEach(price => price.style.display = 'none');
+                    breakfastPrices.forEach(price => price.style.display = 'block');
+                    breakfastPricesFcfa.forEach(price => price.style.display = 'none');
+                    typePrices.forEach(price => price.style.display = 'block');
+                    typePricesFcfa.forEach(price => price.style.display = 'none');
                 } else {
                     roomPrices.forEach(price => price.style.display = 'none');
                     roomPricesFcfa.forEach(price => price.style.display = 'block');
+                    breakfastPrices.forEach(price => price.style.display = 'none');
+                    breakfastPricesFcfa.forEach(price => price.style.display = 'block');
+                    typePrices.forEach(price => price.style.display = 'none');
+                    typePricesFcfa.forEach(price => price.style.display = 'block');
                 }
             }
 
@@ -1253,35 +1307,38 @@
                 const breakfastExtra = parseInt(document.getElementById('breakfastExtra').value);
                 const adults = parseInt(document.getElementById('adults').value);
                 
-                let totalPrice = basePrice + roomExtra;
-                
-                // Ajouter le petit-déjeuner si applicable
-                if (reservationType !== 'journee') {
-                    totalPrice += (breakfastExtra * adults);
-                }
-                
                 // Calculer la durée
                 const checkin = document.getElementById('checkin').value;
                 const checkout = document.getElementById('checkout').value;
-                let duration = 1;
+                let nights = 1;
                 
                 if (checkin && checkout) {
                     const start = new Date(checkin);
                     const end = new Date(checkout);
                     const timeDiff = end.getTime() - start.getTime();
-                    duration = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
                     
                     if (reservationType === 'journee') {
-                        duration = 1; // Forcer à 1 pour les réservations journée
+                        nights = 1; // Forcer à 1 pour les réservations journée
                     }
                 }
                 
-                const total = totalPrice * duration;
-                const totalFcfa = Math.round(total * EUR_TO_XOF_RATE);
+                // Calcul des différents montants
+                const baseAmount = basePrice * nights;
+                const roomExtraAmount = roomExtra * nights;
+                let breakfastExtraAmount = 0;
+                
+                // Ajouter le petit-déjeuner si applicable
+                if (reservationType !== 'journee') {
+                    breakfastExtraAmount = (breakfastExtra * adults) * nights;
+                }
+                
+                const totalAmount = baseAmount + roomExtraAmount + breakfastExtraAmount;
+                const totalFcfa = Math.round(totalAmount * EUR_TO_XOF_RATE);
                 
                 // Mettre à jour l'affichage
                 document.getElementById('durationDisplay').textContent = 
-                    reservationType === 'journee' ? '1 journée' : `${duration} nuit(s)`;
+                    reservationType === 'journee' ? '1 journée' : `${nights} nuit(s)`;
                 
                 document.getElementById('roomTypeDisplay').textContent = 
                     document.querySelector('.room-option.selected h4').textContent;
@@ -1289,14 +1346,18 @@
                 document.getElementById('breakfastDisplay').textContent = 
                     document.querySelector('.breakfast-option.selected h5').textContent;
                 
+                document.getElementById('nightsCountDisplay').textContent = nights;
+                
                 // Afficher les prix selon la devise
                 if (currentCurrency === 'EUR') {
-                    document.getElementById('roomExtraDisplay').textContent = `${roomExtra}€`;
-                    document.getElementById('breakfastExtraDisplay').textContent = `${breakfastExtra * adults}€`;
-                    document.getElementById('totalPrice').textContent = `${total}€`;
+                    document.getElementById('basePriceDisplay').textContent = `${baseAmount}€`;
+                    document.getElementById('roomExtraDisplay').textContent = `${roomExtraAmount}€`;
+                    document.getElementById('breakfastExtraDisplay').textContent = `${breakfastExtraAmount}€`;
+                    document.getElementById('totalPrice').textContent = `${totalAmount}€`;
                 } else {
-                    document.getElementById('roomExtraDisplay').textContent = `${Math.round(roomExtra * EUR_TO_XOF_RATE).toLocaleString()} FCFA`;
-                    document.getElementById('breakfastExtraDisplay').textContent = `${Math.round(breakfastExtra * adults * EUR_TO_XOF_RATE).toLocaleString()} FCFA`;
+                    document.getElementById('basePriceDisplay').textContent = `${Math.round(baseAmount * EUR_TO_XOF_RATE).toLocaleString()} FCFA`;
+                    document.getElementById('roomExtraDisplay').textContent = `${Math.round(roomExtraAmount * EUR_TO_XOF_RATE).toLocaleString()} FCFA`;
+                    document.getElementById('breakfastExtraDisplay').textContent = `${Math.round(breakfastExtraAmount * EUR_TO_XOF_RATE).toLocaleString()} FCFA`;
                     document.getElementById('totalPrice').textContent = `${totalFcfa.toLocaleString()} FCFA`;
                 }
                 
@@ -1304,69 +1365,147 @@
                 document.getElementById('priceSummary').style.display = 'block';
             }
 
-            // Mettre à jour le lien WhatsApp
-            function updateWhatsAppLink() {
+            // Sauvegarder la réservation dans le localStorage
+            function saveReservation() {
                 const formData = new FormData(document.getElementById('bookingForm'));
-                const reservationType = formData.get('reservationType');
-                const roomType = document.querySelector('.room-option.selected h4').textContent;
-                const breakfastType = document.querySelector('.breakfast-option.selected h5').textContent;
+                const reservation = {
+                    id: Date.now(),
+                    type: formData.get('reservationType'),
+                    checkin: formData.get('checkin'),
+                    checkout: formData.get('checkout'),
+                    adults: formData.get('adults'),
+                    children: formData.get('children'),
+                    roomType: formData.get('roomType'),
+                    breakfastType: formData.get('breakfastType'),
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    specialRequests: formData.get('specialRequests'),
+                    status: 'pending',
+                    dateCreated: new Date().toISOString(),
+                    totalPrice: document.getElementById('totalPrice').textContent,
+                    totalPriceFcfa: document.getElementById('totalPriceFcfa').textContent,
+                    confirmationMethod: formData.get('confirmationMethod'),
+                    nights: document.getElementById('nightsCountDisplay').textContent,
+                    basePrice: document.getElementById('basePriceDisplay').textContent,
+                    roomExtra: document.getElementById('roomExtraDisplay').textContent,
+                    breakfastExtra: document.getElementById('breakfastExtraDisplay').textContent
+                };
+
+                // Récupérer les réservations existantes ou initialiser un tableau vide
+                let reservations = JSON.parse(localStorage.getItem('hotelReservations')) || [];
                 
+                // Ajouter la nouvelle réservation
+                reservations.push(reservation);
+                
+                // Sauvegarder dans le localStorage
+                localStorage.setItem('hotelReservations', JSON.stringify(reservations));
+                
+                return reservation;
+            }
+
+            // Envoyer confirmation WhatsApp
+            function sendWhatsAppConfirmation(reservation) {
                 const message = `Bonjour Hôtel Luxe,
 
 Je souhaite confirmer ma réservation :
 
-📅 Type: ${getReservationTypeText(reservationType)}
-🏨 Chambre: ${roomType}
-🍳 Petit-déjeuner: ${breakfastType}
-👥 Personnes: ${formData.get('adults')} adulte(s), ${formData.get('children')} enfant(s)
-📅 Dates: ${formData.get('checkin')} ${reservationType === 'journee' ? '(journée)' : 'au'} ${formData.get('checkout')}
+📅 Référence: #${reservation.id}
+🏨 Type de réservation: ${getReservationTypeText(reservation.type)}
+🛏️ Chambre: ${getRoomTypeText(reservation.roomType)}
+📅 Dates: ${formatDate(reservation.checkin)} au ${formatDate(reservation.checkout)}
+🌙 Nuits: ${reservation.nights}
+👥 Personnes: ${reservation.adults} adulte(s), ${reservation.children} enfant(s)
+🍳 Petit-déjeuner: ${getBreakfastText(reservation.breakfastType)}
+
+💶 DÉTAIL DU MONTANT:
+• Prix de base: ${reservation.basePrice}
+• Supplément chambre: ${reservation.roomExtra}
+• Supplément petit-déjeuner: ${reservation.breakfastExtra}
+• TOTAL: ${reservation.totalPrice} (${reservation.totalPriceFcfa})
 
 Informations personnelles:
-👤 Nom: ${formData.get('firstName')} ${formData.get('lastName')}
-📞 Téléphone: ${formData.get('phone')}
-📧 Email: ${formData.get('email')}
+👤 Nom: ${reservation.firstName} ${reservation.lastName}
+📞 Téléphone: ${reservation.phone}
+📧 Email: ${reservation.email}
 
-Demandes spéciales: ${formData.get('specialRequests') || 'Aucune'}
+Demandes spéciales: ${reservation.specialRequests || 'Aucune'}
 
-Merci de me confirmer la disponibilité.`;
+Merci de confirmer ma réservation.`;
 
                 const encodedMessage = encodeURIComponent(message);
-                document.getElementById('whatsappBtn').href = `https://wa.me/221781970844?text=${encodedMessage}`;
-            }
-
-            function getReservationTypeText(type) {
-                const types = {
-                    'nuit': 'Nuitée Complète',
-                    'journee': 'Réservation Journée',
-                    'dejeuner': 'Nuitée + Petit-déjeuner'
-                };
-                return types[type] || type;
+                return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
             }
 
             // Écouter les changements
             const formInputs = document.querySelectorAll('#bookingForm input, #bookingForm select, #bookingForm textarea');
             formInputs.forEach(input => {
                 input.addEventListener('change', updatePriceCalculation);
-                input.addEventListener('input', updateWhatsAppLink);
             });
 
             // Soumission du formulaire
             document.getElementById('bookingForm').addEventListener('submit', function(e) {
                 e.preventDefault();
-                updateWhatsAppLink();
                 
-                const whatsappBtn = document.getElementById('whatsappBtn');
-                window.open(whatsappBtn.href, '_blank');
+                // Sauvegarder la réservation
+                const reservation = saveReservation();
+                const confirmationMethod = document.getElementById('confirmationMethod').value;
                 
-                alert('Votre réservation a été préparée ! Vous allez être redirigé vers WhatsApp pour confirmation.');
+                // Gérer la confirmation selon la méthode choisie
+                if (confirmationMethod === 'whatsapp') {
+                    const whatsappUrl = sendWhatsAppConfirmation(reservation);
+                    window.open(whatsappUrl, '_blank');
+                    
+                    alert(`Votre réservation a été enregistrée !\n\nRéférence: #${reservation.id}\nMontant total: ${reservation.totalPrice}\n\nVous allez être redirigé vers WhatsApp pour finaliser la confirmation.`);
+                } else {
+                    alert(`Votre réservation a été enregistrée !\n\nRéférence: #${reservation.id}\nMontant total: ${reservation.totalPrice}\n\nUn email de confirmation sera envoyé à ${reservation.email}.`);
+                }
+                
+                // Rediriger vers le tableau de bord après un court délai
+                setTimeout(() => {
+                    window.location.href = 'tableau-de-bord.html';
+                }, 3000);
             });
 
             // Initialiser
             updateReservationTypeUI('nuit');
             updateCurrencyDisplay('EUR');
             updatePriceCalculation();
-            updateWhatsAppLink();
         });
+
+        // Fonctions utilitaires
+        function getReservationTypeText(type) {
+            const types = {
+                'nuit': 'Nuitée Complète',
+                'journee': 'Réservation Journée',
+                'dejeuner': 'Nuitée + Petit-déjeuner'
+            };
+            return types[type] || type;
+        }
+
+        function getRoomTypeText(type) {
+            const types = {
+                'standard': 'Chambre Standard',
+                'deluxe': 'Chambre Deluxe',
+                'suite': 'Suite'
+            };
+            return types[type] || type;
+        }
+
+        function getBreakfastText(type) {
+            const types = {
+                'sans': 'Sans petit-déjeuner',
+                'continental': 'Continental',
+                'buffet': 'Buffet complet'
+            };
+            return types[type] || type;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-FR');
+        }
     </script>
 </body>
 </html>

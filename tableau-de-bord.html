@@ -12,16 +12,13 @@
             --primary-dark: #1D7874;
             --secondary-color: #E76F51;
             --accent-color: #264653;
+            --gold-color: #D4AF37;
             --light-bg: #F8F9FA;
             --lighter-bg: #FFFFFF;
             --border-color: #E9ECEF;
             --text-dark: #264653;
             --text-light: #6C757D;
-            --success-color: #28a745;
-            --warning-color: #ffc107;
-            --danger-color: #dc3545;
-            --info-color: #17a2b8;
-            --border-radius: 16px;
+            --border-radius: 15px;
             --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
         }
@@ -36,25 +33,26 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background-color: #f5f7fa;
+            background-color: var(--light-bg);
         }
 
         .container {
             width: 100%;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
         /* Header */
         header {
-            background: var(--accent-color);
-            color: white;
+            background: var(--lighter-bg);
             padding: 1rem 0;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .header-container {
@@ -66,35 +64,33 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: white;
+            color: var(--accent-color);
             text-decoration: none;
         }
 
         .logo span {
-            color: var(--secondary-color);
+            color: var(--primary-color);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 1.5rem;
+            gap: 2rem;
         }
 
         nav ul li a {
-            color: white;
+            color: var(--text-dark);
             text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
+            font-weight: 600;
             transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
         }
 
-        nav ul li a:hover, nav ul li a.active {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--secondary-color);
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-color);
+            background: rgba(42, 157, 143, 0.1);
         }
 
         .menu-toggle {
@@ -103,86 +99,68 @@
             cursor: pointer;
         }
 
-        /* Currency Selector */
-        .currency-selector {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: var(--box-shadow);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .currency-btn {
-            padding: 8px 12px;
-            border: 2px solid var(--border-color);
-            background: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
-        }
-
-        .currency-btn.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
         /* Page Header */
         .page-header {
-            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            background: linear-gradient(rgba(38, 70, 83, 0.8), rgba(38, 70, 83, 0.8)), 
+                        url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200');
+            background-size: cover;
+            background-position: center;
             color: white;
-            padding: 4rem 0;
+            padding: 120px 0 80px;
             text-align: center;
+            margin-top: 70px;
         }
 
         .page-header h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
         }
 
         .page-header p {
             font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
             opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
         }
 
-        /* Dashboard Layout */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Dashboard */
         .dashboard {
             padding: 3rem 0;
         }
 
-        .dashboard-layout {
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: 280px 1fr 350px;
+            grid-template-columns: 300px 1fr;
             gap: 2rem;
-            align-items: start;
         }
 
         /* Sidebar */
         .dashboard-sidebar {
             background: white;
             border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
             padding: 2rem;
+            box-shadow: var(--box-shadow);
             height: fit-content;
             position: sticky;
-            top: 120px;
+            top: 100px;
         }
 
         .user-profile {
             text-align: center;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid var(--light-bg);
             margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .profile-image {
@@ -204,23 +182,6 @@
             font-size: 0.9rem;
         }
 
-        .user-badges {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
         .dashboard-nav {
             display: flex;
             flex-direction: column;
@@ -231,15 +192,15 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1rem 1.5rem;
+            padding: 1rem;
             text-decoration: none;
             color: var(--text-dark);
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             transition: var(--transition);
-            position: relative;
         }
 
-        .nav-item:hover, .nav-item.active {
+        .nav-item:hover,
+        .nav-item.active {
             background: var(--primary-color);
             color: white;
         }
@@ -249,194 +210,34 @@
             text-align: center;
         }
 
-        .nav-badge {
-            position: absolute;
-            right: 1rem;
-            background: var(--secondary-color);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        /* Main Content */
-        .dashboard-main {
+        /* Dashboard Content */
+        .dashboard-content {
             display: flex;
             flex-direction: column;
             gap: 2rem;
         }
 
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-        }
-
-        .action-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .action-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
-        }
-
-        .action-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin: 0 auto 1rem;
-        }
-
-        .action-card h4 {
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        /* Dashboard Sections */
         .dashboard-section {
             background: white;
             border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
             padding: 2rem;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .section-header h2 {
-            color: var(--accent-color);
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-actions {
-            display: flex;
-            gap: 1rem;
-            margin-left: auto;
-        }
-
-        /* View Toggles */
-        .view-toggle {
-            display: flex;
-            background: var(--light-bg);
-            border-radius: 10px;
-            padding: 0.25rem;
-        }
-
-        .view-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .view-btn.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* Filtres */
-        .filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .filter-select {
-            padding: 0.5rem 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            background: white;
-            font-size: 0.9rem;
-        }
-
-        /* Statistiques */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            text-align: center;
-            transition: var(--transition);
-            border-left: 4px solid var(--primary-color);
+            display: none;
         }
 
-        .stat-card:hover {
-            transform: translateY(-3px);
+        .dashboard-section.active {
+            display: block;
         }
 
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin: 0 auto 1rem;
-        }
-
-        .stat-info h3 {
-            font-size: 1.8rem;
+        .dashboard-section h2 {
             color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-info p {
-            color: var(--text-light);
-            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-bg);
         }
 
         /* Réservations */
-        .reservations-container {
+        .reservations-list {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
@@ -447,49 +248,45 @@
             border-radius: var(--border-radius);
             padding: 1.5rem;
             transition: var(--transition);
-            position: relative;
         }
 
         .reservation-card:hover {
             border-color: var(--primary-color);
             transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
         }
 
         .reservation-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .reservation-header h3 {
             color: var(--accent-color);
-            font-size: 1.2rem;
         }
 
         .status {
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1rem;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            text-transform: uppercase;
         }
 
         .status.confirmed {
-            background: rgba(40, 167, 69, 0.1);
-            color: var(--success-color);
+            background: #D4EDDA;
+            color: #155724;
         }
 
         .status.pending {
-            background: rgba(255, 193, 7, 0.1);
-            color: var(--warning-color);
+            background: #FFF3CD;
+            color: #856404;
         }
 
         .status.cancelled {
-            background: rgba(220, 53, 69, 0.1);
-            color: var(--danger-color);
+            background: #F8D7DA;
+            color: #721C24;
         }
 
         .reservation-details {
@@ -502,9 +299,8 @@
         .detail {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
             color: var(--text-light);
-            font-size: 0.9rem;
         }
 
         .detail i {
@@ -514,115 +310,23 @@
 
         .reservation-actions {
             display: flex;
-            gap: 0.75rem;
+            gap: 1rem;
             flex-wrap: wrap;
-        }
-
-        /* Side Panel */
-        .dashboard-side-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .panel-card {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-        }
-
-        .panel-card h3 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Prochain séjour */
-        .next-stay {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-        }
-
-        .next-stay h3 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .stay-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .stay-detail {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .stay-detail i {
-            width: 20px;
-        }
-
-        /* Avantages */
-        .benefits-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--light-bg);
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-
-        .benefit-item:hover {
-            background: var(--lighter-bg);
-            transform: translateX(5px);
-        }
-
-        .benefit-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
         }
 
         /* Boutons */
         .btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
-            cursor: pointer;
+            text-decoration: none;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            text-decoration: none;
             border: none;
+            cursor: pointer;
             font-size: 0.9rem;
-            white-space: nowrap;
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
         }
 
         .btn-primary {
@@ -647,23 +351,185 @@
         }
 
         .btn-danger {
-            background: var(--danger-color);
+            background: #DC3545;
             color: white;
         }
 
         .btn-danger:hover {
-            background: #c82333;
+            background: #C82333;
             transform: translateY(-2px);
         }
 
         .btn-success {
-            background: var(--success-color);
+            background: #28A745;
             color: white;
         }
 
         .btn-success:hover {
             background: #218838;
             transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-email {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-email:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Formulaire */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+        }
+
+        /* Statistiques */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .stat-info h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-info p {
+            color: var(--text-light);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .modal-header h3 {
+            color: var(--accent-color);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Options de confirmation */
+        .confirmation-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         /* WhatsApp Float */
@@ -696,7 +562,6 @@
             background: var(--accent-color);
             color: white;
             padding: 3rem 0 1rem;
-            margin-top: 4rem;
         }
 
         .footer-content {
@@ -707,12 +572,12 @@
         }
 
         .footer-section h3 {
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
 
-        .footer-section p, .footer-section li {
-            margin-bottom: 0.75rem;
+        .footer-section p {
+            margin-bottom: 0.5rem;
             opacity: 0.8;
         }
 
@@ -720,14 +585,21 @@
             list-style: none;
         }
 
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
         .footer-section ul li a {
             color: white;
             text-decoration: none;
+            opacity: 0.8;
             transition: var(--transition);
         }
 
         .footer-section ul li a:hover {
-            color: var(--secondary-color);
+            opacity: 1;
+            color: var(--primary-color);
+            padding-left: 5px;
         }
 
         .social-links {
@@ -748,7 +620,8 @@
         }
 
         .social-links a:hover {
-            background: var(--secondary-color);
+            background: var(--primary-color);
+            transform: translateY(-2px);
         }
 
         .copyright {
@@ -759,19 +632,6 @@
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
-            .dashboard-layout {
-                grid-template-columns: 280px 1fr;
-            }
-            
-            .dashboard-side-panel {
-                grid-column: 1 / -1;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 2rem;
-            }
-        }
-
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -782,12 +642,13 @@
                 top: 70px;
                 left: 0;
                 right: 0;
-                background: var(--accent-color);
+                background: var(--lighter-bg);
                 flex-direction: column;
-                padding: 1rem;
+                padding: 2rem;
                 transform: translateY(-100%);
                 opacity: 0;
                 transition: var(--transition);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             }
 
             nav ul.active {
@@ -795,19 +656,16 @@
                 opacity: 1;
             }
 
-            nav ul li {
-                margin: 0;
-                width: 100%;
+            .page-header {
+                padding: 100px 0 60px;
+                margin-top: 60px;
             }
 
-            nav ul li a {
-                display: block;
-                padding: 1rem;
-                border-radius: 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            .page-header h1 {
+                font-size: 2.2rem;
             }
 
-            .dashboard-layout {
+            .dashboard-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -815,20 +673,8 @@
                 position: static;
             }
 
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .section-actions {
-                margin-left: 0;
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .reservation-header {
-                flex-direction: column;
-                align-items: flex-start;
+            .form-row {
+                grid-template-columns: 1fr;
             }
 
             .reservation-details {
@@ -836,20 +682,11 @@
             }
 
             .reservation-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .filters {
                 flex-direction: column;
             }
 
-            .currency-selector {
-                right: 10px;
-                bottom: 100px;
-                top: auto;
-                transform: none;
-                flex-direction: row;
+            .confirmation-options {
+                flex-direction: column;
             }
 
             .whatsapp-float {
@@ -879,292 +716,248 @@
         </div>
     </header>
 
-    <!-- Currency Selector -->
-    <div class="currency-selector">
-        <button class="currency-btn active" data-currency="EUR">
-            <i class="fas fa-euro-sign"></i> EUR
-        </button>
-        <button class="currency-btn" data-currency="XOF">
-            <i class="fas fa-franc-sign"></i> FCFA
-        </button>
-    </div>
-
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1>Tableau de bord</h1>
-            <p>Votre espace personnel pour gérer vos séjours et préférences</p>
+            <p>Gérez vos réservations et préférences</p>
         </div>
     </section>
 
     <!-- Dashboard Content -->
     <section class="dashboard">
         <div class="container">
-            <div class="dashboard-layout">
+            <div class="dashboard-grid">
                 <!-- Sidebar -->
                 <div class="dashboard-sidebar">
                     <div class="user-profile">
                         <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="Profile" class="profile-image">
-                        <h3>Marie Diallo</h3>
-                        <p>Membre Diamant • Depuis 2022</p>
-                        <div class="user-badges">
-                            <span class="badge">VIP</span>
-                            <span class="badge" style="background: var(--secondary-color);">Fidèle</span>
-                        </div>
+                        <h3 id="userName">Chargement...</h3>
+                        <p>Membre depuis <span id="memberSince">2023</span></p>
                     </div>
                     <nav class="dashboard-nav">
-                        <a href="#overview" class="nav-item active">
-                            <i class="fas fa-chart-pie"></i>
-                            Vue d'ensemble
-                        </a>
-                        <a href="#reservations" class="nav-item">
+                        <a href="#reservations" class="nav-item active" data-section="reservations">
                             <i class="fas fa-calendar-check"></i>
                             Mes réservations
-                            <span class="nav-badge">2</span>
                         </a>
-                        <a href="#profile" class="nav-item">
+                        <a href="#profile" class="nav-item" data-section="profile">
                             <i class="fas fa-user"></i>
                             Mon profil
                         </a>
-                        <a href="#preferences" class="nav-item">
+                        <a href="#preferences" class="nav-item" data-section="preferences">
                             <i class="fas fa-cog"></i>
                             Préférences
                         </a>
-                        <a href="#history" class="nav-item">
+                        <a href="#history" class="nav-item" data-section="history">
                             <i class="fas fa-history"></i>
                             Historique
-                        </a>
-                        <a href="#documents" class="nav-item">
-                            <i class="fas fa-file-alt"></i>
-                            Documents
-                        </a>
-                        <a href="#support" class="nav-item">
-                            <i class="fas fa-headset"></i>
-                            Support
-                            <span class="nav-badge">1</span>
                         </a>
                     </nav>
                 </div>
 
                 <!-- Main Content -->
-                <div class="dashboard-main">
-                    <!-- Actions rapides -->
-                    <div class="quick-actions">
-                        <div class="action-card" onclick="showSection('reservations')">
-                            <div class="action-icon">
-                                <i class="fas fa-plus"></i>
+                <div class="dashboard-content">
+                    <!-- Statistiques -->
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-check"></i>
                             </div>
-                            <h4>Nouvelle réservation</h4>
+                            <div class="stat-info">
+                                <h3 id="totalReservations">0</h3>
+                                <p>Réservations totales</p>
+                            </div>
                         </div>
-                        <div class="action-card" onclick="showSection('documents')">
-                            <div class="action-icon">
-                                <i class="fas fa-file-invoice"></i>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-moon"></i>
                             </div>
-                            <h4>Mes factures</h4>
+                            <div class="stat-info">
+                                <h3 id="totalNights">0</h3>
+                                <p>Nuits réservées</p>
+                            </div>
                         </div>
-                        <div class="action-card" onclick="showSection('preferences')">
-                            <div class="action-icon">
-                                <i class="fas fa-bell"></i>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
                             </div>
-                            <h4>Notifications</h4>
-                        </div>
-                        <div class="action-card" onclick="window.open('https://wa.me/221781970844', '_blank')">
-                            <div class="action-icon" style="background: #25D366;">
-                                <i class="fab fa-whatsapp"></i>
+                            <div class="stat-info">
+                                <h3 id="averageRating">0</h3>
+                                <p>Note moyenne</p>
                             </div>
-                            <h4>Support WhatsApp</h4>
                         </div>
                     </div>
 
-                    <!-- Vue d'ensemble -->
-                    <div class="dashboard-section active" id="overview">
+                    <!-- Réservations Actives -->
+                    <div class="dashboard-section active" id="reservations-section">
                         <div class="section-header">
-                            <h2><i class="fas fa-chart-pie"></i> Vue d'ensemble</h2>
-                            <div class="section-actions">
-                                <div class="view-toggle">
-                                    <button class="view-btn active" data-view="cards">Cartes</button>
-                                    <button class="view-btn" data-view="list">Liste</button>
-                                </div>
-                                <select class="filter-select">
-                                    <option>30 derniers jours</option>
-                                    <option>3 derniers mois</option>
-                                    <option>Cette année</option>
-                                    <option>Tout l'historique</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-calendar-check"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <h3>8</h3>
-                                    <p>Réservations totales</p>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-moon"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <h3>24</h3>
-                                    <p>Nuits réservées</p>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <h3>4.8</h3>
-                                    <p>Note moyenne</p>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-gift"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <h3>1 850</h3>
-                                    <p>Points fidélité</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Réservations récentes -->
-                        <div class="section-header">
-                            <h2><i class="fas fa-clock"></i> Réservations récentes</h2>
-                            <button class="btn btn-outline btn-sm" onclick="showSection('reservations')">
-                                Voir tout
+                            <h2>Mes réservations</h2>
+                            <button class="btn btn-primary" id="newReservationBtn">
+                                <i class="fas fa-plus"></i> Nouvelle réservation
                             </button>
                         </div>
-
-                        <div class="reservations-container">
-                            <div class="reservation-card">
-                                <div class="reservation-header">
-                                    <h3>Suite Deluxe - Vue Fleuve</h3>
-                                    <span class="status confirmed">Confirmée</span>
-                                </div>
-                                <div class="reservation-details">
-                                    <div class="detail">
-                                        <i class="fas fa-calendar"></i>
-                                        <span>15-20 Déc 2024 (5 nuits)</span>
-                                    </div>
-                                    <div class="detail">
-                                        <i class="fas fa-users"></i>
-                                        <span>2 adultes, 1 enfant</span>
-                                    </div>
-                                    <div class="detail">
-                                        <i class="fas fa-euro-sign"></i>
-                                        <span class="price-eur">Total: 950€</span>
-                                        <span class="price-fcfa" style="display: none;">Total: 622 250 FCFA</span>
-                                    </div>
-                                </div>
-                                <div class="reservation-actions">
-                                    <button class="btn btn-outline btn-sm">
-                                        <i class="fas fa-edit"></i> Modifier
-                                    </button>
-                                    <button class="btn btn-primary btn-sm">
-                                        <i class="fas fa-credit-card"></i> Payer
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="reservations-list" id="reservationsList">
+                            <!-- Les réservations seront chargées ici dynamiquement -->
                         </div>
                     </div>
 
-                    <!-- Autres sections (seraient chargées dynamiquement) -->
-                    <div class="dashboard-section" id="reservations" style="display: none;">
-                        <!-- Contenu des réservations -->
+                    <!-- Profil Utilisateur -->
+                    <div class="dashboard-section" id="profile-section">
+                        <h2>Mon profil</h2>
+                        <form class="profile-form" id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="profileFirstName">Prénom</label>
+                                    <input type="text" id="profileFirstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileLastName">Nom</label>
+                                    <input type="text" id="profileLastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email</label>
+                                <input type="email" id="profileEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhone">Téléphone</label>
+                                <input type="tel" id="profilePhone" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                        </form>
                     </div>
 
-                    <div class="dashboard-section" id="profile" style="display: none;">
-                        <!-- Contenu du profil -->
-                    </div>
-                </div>
-
-                <!-- Side Panel -->
-                <div class="dashboard-side-panel">
-                    <!-- Prochain séjour -->
-                    <div class="panel-card next-stay">
-                        <h3><i class="fas fa-arrow-right"></i> Prochain séjour</h3>
-                        <div class="stay-info">
-                            <div class="stay-detail">
-                                <i class="fas fa-calendar"></i>
-                                <span>15-20 Déc 2024</span>
+                    <!-- Préférences -->
+                    <div class="dashboard-section" id="preferences-section">
+                        <h2>Préférences</h2>
+                        <form class="preferences-form" id="preferencesForm">
+                            <div class="form-group">
+                                <label for="prefRoomType">Type de chambre préféré</label>
+                                <select id="prefRoomType">
+                                    <option value="standard">Standard</option>
+                                    <option value="deluxe">Deluxe</option>
+                                    <option value="suite">Suite</option>
+                                </select>
                             </div>
-                            <div class="stay-detail">
-                                <i class="fas fa-bed"></i>
-                                <span>Suite Deluxe</span>
+                            <div class="form-group">
+                                <label for="prefBreakfast">Petit-déjeuner préféré</label>
+                                <select id="prefBreakfast">
+                                    <option value="sans">Sans petit-déjeuner</option>
+                                    <option value="continental">Continental</option>
+                                    <option value="buffet">Buffet complet</option>
+                                </select>
                             </div>
-                            <div class="stay-detail">
-                                <i class="fas fa-users"></i>
-                                <span>2 adultes, 1 enfant</span>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="prefNewsletter"> Recevoir les newsletters
+                                </label>
                             </div>
-                            <div class="stay-detail">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Confirmée</span>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="prefSMS"> Recevoir les notifications SMS
+                                </label>
                             </div>
-                        </div>
-                        <button class="btn btn-outline" style="margin-top: 1rem; background: rgba(255,255,255,0.2); color: white; border-color: white;">
-                            <i class="fas fa-info-circle"></i> Détails
-                        </button>
-                    </div>
-
-                    <!-- Avantages -->
-                    <div class="panel-card">
-                        <h3><i class="fas fa-crown"></i> Vos avantages</h3>
-                        <div class="benefits-list">
-                            <div class="benefit-item">
-                                <div class="benefit-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <strong>Check-in anticipé</strong>
-                                    <p>Dès 12h00</p>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <div class="benefit-icon">
-                                    <i class="fas fa-glass-cheers"></i>
-                                </div>
-                                <div>
-                                    <strong>Welcome drink</strong>
-                                    <p>Offert à l'arrivée</p>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <div class="benefit-icon">
-                                    <i class="fas fa-spa"></i>
-                                </div>
-                                <div>
-                                    <strong>–15% Spa</strong>
-                                    <p>Sur tous les soins</p>
-                                </div>
-                            </div>
-                        </div>
+                            <button type="submit" class="btn btn-primary">Enregistrer les préférences</button>
+                        </form>
                     </div>
 
-                    <!-- Support rapide -->
-                    <div class="panel-card">
-                        <h3><i class="fas fa-headset"></i> Support rapide</h3>
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <a href="https://wa.me/221781970844" class="btn btn-success" target="_blank">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
-                            </a>
-                            <a href="tel:+221331234567" class="btn btn-primary">
-                                <i class="fas fa-phone"></i> Appeler
-                            </a>
-                            <a href="mailto:support@hotelluxe.sn" class="btn btn-outline">
-                                <i class="fas fa-envelope"></i> Email
-                            </a>
+                    <!-- Historique -->
+                    <div class="dashboard-section" id="history-section">
+                        <h2>Historique des réservations</h2>
+                        <div class="reservations-list" id="historyList">
+                            <!-- L'historique sera chargé ici dynamiquement -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Modal de confirmation WhatsApp -->
+    <div class="modal" id="whatsappModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fab fa-whatsapp"></i> Confirmation WhatsApp</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Pour confirmer votre réservation, envoyez les détails suivants sur WhatsApp :</p>
+                <div id="whatsappMessage" style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-family: monospace; white-space: pre-wrap;"></div>
+                <p>Numéro WhatsApp : <strong>+221 78 197 08 44</strong></p>
+                <a href="#" class="btn btn-whatsapp" id="sendWhatsAppBtn" target="_blank" style="width: 100%; justify-content: center;">
+                    <i class="fab fa-whatsapp"></i> Ouvrir WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation Email -->
+    <div class="modal" id="emailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-envelope"></i> Confirmation par Email</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Un email de confirmation va être envoyé avec les détails suivants :</p>
+                <div id="emailMessage" style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-family: monospace; white-space: pre-wrap;"></div>
+                <p>Email de destination : <strong id="destinationEmail"></strong></p>
+                <div class="confirmation-options">
+                    <button class="btn btn-email" id="sendEmailBtn" style="flex: 1;">
+                        <i class="fas fa-paper-plane"></i> Envoyer l'email
+                    </button>
+                    <button class="btn btn-outline" id="openEmailClient" style="flex: 1;">
+                        <i class="fas fa-envelope-open"></i> Ouvrir le client email
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de modification de réservation -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Modifier la réservation</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editReservationForm">
+                    <input type="hidden" id="editReservationId">
+                    <div class="form-group">
+                        <label for="editCheckin">Date d'arrivée</label>
+                        <input type="date" id="editCheckin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCheckout">Date de départ</label>
+                        <input type="date" id="editCheckout" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editAdults">Adultes</label>
+                        <select id="editAdults" required>
+                            <option value="1">1 Adulte</option>
+                            <option value="2">2 Adultes</option>
+                            <option value="3">3 Adultes</option>
+                            <option value="4">4 Adultes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editChildren">Enfants</label>
+                        <select id="editChildren">
+                            <option value="0">Aucun</option>
+                            <option value="1">1 Enfant</option>
+                            <option value="2">2 Enfants</option>
+                            <option value="3">3 Enfants</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                        <button type="button" class="btn btn-outline" id="cancelEdit">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- WhatsApp Float -->
     <a href="https://wa.me/221781970844" class="whatsapp-float" target="_blank">
@@ -1178,8 +971,9 @@
                 <div class="footer-section">
                     <h3>Hôtel Luxe</h3>
                     <p>Rue Khalifa Ababacar Sy<br>Saint-Louis, Sénégal</p>
-                    <p><i class="fas fa-phone"></i> +221 33 123 45 67</p>
-                    <p><i class="fas fa-envelope"></i> contact@hotelluxe.sn</p>
+                    <small>Au cœur de la ville historique</small>
+                    <p><i class="fas fa-phone"></i> +33 1 23 45 67 89</p>
+                    <p><i class="fas fa-envelope"></i> contact@hotelluxe.com</p>
                 </div>
                 <div class="footer-section">
                     <h3>Liens rapides</h3>
@@ -1192,19 +986,19 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Support client</h3>
-                    <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
-                    <p>Assistance 24h/24</p>
-                    <p>Réservations express</p>
-                </div>
-                <div class="footer-section">
                     <h3>Suivez-nous</h3>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact WhatsApp</h3>
+                    <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
+                    <p>Réservations et informations</p>
+                    <p>Disponible 24h/24</p>
                 </div>
             </div>
             <div class="copyright">
@@ -1214,147 +1008,543 @@
     </footer>
 
     <script>
-        // Taux de conversion
-        const EUR_TO_XOF_RATE = 655;
-        let currentCurrency = 'EUR';
+        // Gestion des données utilisateur et réservations
+        const USER_DATA_KEY = 'hotelUserData';
+        const RESERVATIONS_KEY = 'hotelReservations';
+        const WHATSAPP_NUMBER = '221781970844';
 
+        // Données par défaut
+        const defaultUserData = {
+            firstName: 'Jean',
+            lastName: 'Dupont',
+            email: 'jean.dupont@email.com',
+            phone: '+33 1 23 45 67 89',
+            memberSince: '2023',
+            preferences: {
+                roomType: 'standard',
+                breakfast: 'sans',
+                newsletter: true,
+                sms: false
+            }
+        };
+
+        // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
-            // Gestion du menu responsive
-            const menuToggle = document.getElementById('menuToggle');
-            const mainNav = document.getElementById('mainNav');
+            initializeDashboard();
+            setupEventListeners();
+            loadReservations();
+            updateStatistics();
+        });
+
+        function initializeDashboard() {
+            // Initialiser les données utilisateur si elles n'existent pas
+            if (!localStorage.getItem(USER_DATA_KEY)) {
+                localStorage.setItem(USER_DATA_KEY, JSON.stringify(defaultUserData));
+            }
+
+            // Initialiser les réservations si elles n'existent pas
+            if (!localStorage.getItem(RESERVATIONS_KEY)) {
+                localStorage.setItem(RESERVATIONS_KEY, JSON.stringify([]));
+            }
+
+            // Charger les données utilisateur
+            loadUserData();
+        }
+
+        function loadUserData() {
+            const userData = JSON.parse(localStorage.getItem(USER_DATA_KEY));
             
-            if (menuToggle && mainNav) {
-                menuToggle.addEventListener('click', function() {
-                    mainNav.classList.toggle('active');
-                    menuToggle.innerHTML = mainNav.classList.contains('active') ? 
-                        '<i class="fas fa-times"></i>' : 
-                        '<i class="fas fa-bars"></i>';
-                });
+            // Mettre à jour l'interface
+            document.getElementById('userName').textContent = `${userData.firstName} ${userData.lastName}`;
+            document.getElementById('memberSince').textContent = userData.memberSince;
+            
+            // Remplir le formulaire de profil
+            document.getElementById('profileFirstName').value = userData.firstName;
+            document.getElementById('profileLastName').value = userData.lastName;
+            document.getElementById('profileEmail').value = userData.email;
+            document.getElementById('profilePhone').value = userData.phone;
+            
+            // Remplir les préférences
+            document.getElementById('prefRoomType').value = userData.preferences.roomType;
+            document.getElementById('prefBreakfast').value = userData.preferences.breakfast;
+            document.getElementById('prefNewsletter').checked = userData.preferences.newsletter;
+            document.getElementById('prefSMS').checked = userData.preferences.sms;
+        }
+
+        function loadReservations() {
+            const reservations = JSON.parse(localStorage.getItem(RESERVATIONS_KEY));
+            const reservationsList = document.getElementById('reservationsList');
+            const historyList = document.getElementById('historyList');
+            
+            reservationsList.innerHTML = '';
+            historyList.innerHTML = '';
+
+            if (reservations.length === 0) {
+                reservationsList.innerHTML = `
+                    <div class="no-reservations">
+                        <i class="fas fa-calendar-times" style="font-size: 3rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--text-light); margin-bottom: 0.5rem;">Aucune réservation</h3>
+                        <p style="color: var(--text-light);">Vous n'avez pas encore de réservation.</p>
+                        <a href="reservation.html" class="btn btn-primary" style="margin-top: 1rem;">
+                            <i class="fas fa-plus"></i> Faire une réservation
+                        </a>
+                    </div>
+                `;
+                return;
             }
 
-            // Gestion du changement de devise
-            const currencyButtons = document.querySelectorAll('.currency-btn');
-            currencyButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const currency = this.dataset.currency;
-                    
-                    currencyButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    currentCurrency = currency;
-                    updateCurrencyDisplay(currency);
-                });
-            });
-
-            // Mettre à jour l'affichage des devises
-            function updateCurrencyDisplay(currency) {
-                const eurPrices = document.querySelectorAll('.price-eur');
-                const fcfaPrices = document.querySelectorAll('.price-fcfa');
+            reservations.forEach(reservation => {
+                const reservationElement = createReservationElement(reservation);
                 
-                if (currency === 'EUR') {
-                    eurPrices.forEach(price => price.style.display = 'inline');
-                    fcfaPrices.forEach(price => price.style.display = 'none');
+                if (reservation.status === 'cancelled') {
+                    historyList.appendChild(reservationElement);
                 } else {
-                    eurPrices.forEach(price => price.style.display = 'none');
-                    fcfaPrices.forEach(price => price.style.display = 'inline');
+                    reservationsList.appendChild(reservationElement);
                 }
-            }
+            });
+        }
 
+        function createReservationElement(reservation) {
+            const element = document.createElement('div');
+            element.className = 'reservation-card';
+            element.dataset.id = reservation.id;
+
+            const statusClass = reservation.status === 'confirmed' ? 'confirmed' : 
+                              reservation.status === 'pending' ? 'pending' : 'cancelled';
+            
+            const statusText = reservation.status === 'confirmed' ? 'Confirmée' : 
+                             reservation.status === 'pending' ? 'En attente' : 'Annulée';
+
+            element.innerHTML = `
+                <div class="reservation-header">
+                    <h3>${getRoomTypeText(reservation.roomType)}</h3>
+                    <span class="status ${statusClass}">${statusText}</span>
+                </div>
+                <div class="reservation-details">
+                    <div class="detail">
+                        <i class="fas fa-calendar"></i>
+                        <span>${formatDate(reservation.checkin)} - ${formatDate(reservation.checkout)} (${calculateNights(reservation.checkin, reservation.checkout)} nuits)</span>
+                    </div>
+                    <div class="detail">
+                        <i class="fas fa-users"></i>
+                        <span>${reservation.adults} adulte(s), ${reservation.children} enfant(s)</span>
+                    </div>
+                    <div class="detail">
+                        <i class="fas fa-euro-sign"></i>
+                        <span>Total: ${reservation.totalPrice}</span>
+                    </div>
+                    <div class="detail">
+                        <i class="fas fa-coffee"></i>
+                        <span>Petit-déjeuner: ${getBreakfastText(reservation.breakfastType)}</span>
+                    </div>
+                </div>
+                <div class="reservation-actions">
+                    ${reservation.status !== 'cancelled' ? `
+                        <button class="btn btn-outline edit-reservation" data-id="${reservation.id}">
+                            <i class="fas fa-edit"></i> Modifier
+                        </button>
+                        <div class="confirmation-options">
+                            <button class="btn btn-success confirm-whatsapp" data-id="${reservation.id}">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </button>
+                            <button class="btn btn-email confirm-email" data-id="${reservation.id}">
+                                <i class="fas fa-envelope"></i> Email
+                            </button>
+                        </div>
+                        <button class="btn btn-danger cancel-reservation" data-id="${reservation.id}">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                    ` : `
+                        <button class="btn btn-outline" onclick="rebookReservation(${reservation.id})">
+                            <i class="fas fa-redo"></i> Réserver à nouveau
+                        </button>
+                    `}
+                </div>
+            `;
+
+            return element;
+        }
+
+        function setupEventListeners() {
             // Navigation du tableau de bord
-            const navItems = document.querySelectorAll('.nav-item');
-            const sections = document.querySelectorAll('.dashboard-section');
-
-            navItems.forEach(item => {
+            document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
+                    const section = this.dataset.section;
                     
-                    // Retirer la classe active de tous les éléments
-                    navItems.forEach(nav => nav.classList.remove('active'));
-                    sections.forEach(section => section.classList.remove('active'));
-                    
-                    // Ajouter la classe active à l'élément cliqué
+                    // Mettre à jour la navigation active
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
                     this.classList.add('active');
                     
                     // Afficher la section correspondante
-                    const targetId = this.getAttribute('href').substring(1);
-                    document.getElementById(targetId).classList.add('active');
+                    document.querySelectorAll('.dashboard-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.getElementById(`${section}-section`).classList.add('active');
                 });
             });
 
-            // Gestion des vues (cartes/liste)
-            const viewButtons = document.querySelectorAll('.view-btn');
-            viewButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const viewType = this.dataset.view;
-                    
-                    viewButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Ici vous pourriez changer l'affichage des réservations
-                    console.log('Changement de vue:', viewType);
+            // Formulaire de profil
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveUserData();
+            });
+
+            // Formulaire de préférences
+            document.getElementById('preferencesForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                savePreferences();
+            });
+
+            // Nouvelle réservation
+            document.getElementById('newReservationBtn').addEventListener('click', function() {
+                window.location.href = 'reservation.html';
+            });
+
+            // Modals
+            document.querySelectorAll('.close-modal, .modal').forEach(element => {
+                element.addEventListener('click', function(e) {
+                    if (e.target === this || e.target.classList.contains('close-modal')) {
+                        document.querySelectorAll('.modal').forEach(modal => {
+                            modal.classList.remove('active');
+                        });
+                    }
                 });
             });
 
-            // Chargement des données utilisateur
-            loadUserData();
-        });
+            // Annuler l'édition
+            document.getElementById('cancelEdit').addEventListener('click', function() {
+                document.getElementById('editModal').classList.remove('active');
+            });
 
-        // Fonction pour afficher une section spécifique
-        function showSection(sectionId) {
-            document.querySelectorAll('.dashboard-section').forEach(section => {
-                section.style.display = 'none';
+            // Formulaire d'édition de réservation
+            document.getElementById('editReservationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                updateReservation();
             });
-            document.querySelectorAll('.nav-item').forEach(nav => {
-                nav.classList.remove('active');
+
+            // Envoi d'email
+            document.getElementById('sendEmailBtn').addEventListener('click', function() {
+                sendEmailConfirmation();
             });
-            
-            document.getElementById(sectionId).style.display = 'block';
-            document.querySelector(`[href="#${sectionId}"]`).classList.add('active');
+
+            // Ouvrir client email
+            document.getElementById('openEmailClient').addEventListener('click', function() {
+                openEmailClient();
+            });
+
+            // Déléguation d'événements pour les boutons des réservations
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.edit-reservation')) {
+                    const reservationId = e.target.closest('.edit-reservation').dataset.id;
+                    openEditModal(reservationId);
+                }
+                
+                if (e.target.closest('.confirm-whatsapp')) {
+                    const reservationId = e.target.closest('.confirm-whatsapp').dataset.id;
+                    openWhatsAppModal(reservationId);
+                }
+                
+                if (e.target.closest('.confirm-email')) {
+                    const reservationId = e.target.closest('.confirm-email').dataset.id;
+                    openEmailModal(reservationId);
+                }
+                
+                if (e.target.closest('.cancel-reservation')) {
+                    const reservationId = e.target.closest('.cancel-reservation').dataset.id;
+                    cancelReservation(reservationId);
+                }
+            });
         }
 
-        // Charger les données utilisateur
-        function loadUserData() {
-            const userData = JSON.parse(localStorage.getItem('hotelUserData')) || {
-                firstName: 'Marie',
-                lastName: 'Diallo',
-                email: 'marie.diallo@email.com',
-                phone: '+221 78 123 45 67',
-                loyaltyPoints: 1850,
-                memberSince: '2022'
-            };
+        function openEditModal(reservationId) {
+            const reservations = JSON.parse(localStorage.getItem(RESERVATIONS_KEY));
+            const reservation = reservations.find(r => r.id == reservationId);
             
-            // Mettre à jour l'interface avec les données utilisateur
-            updateUserInterface(userData);
-        }
-
-        function updateUserInterface(userData) {
-            // Mettre à jour les points de fidélité, etc.
-            const pointsElement = document.querySelector('.stat-info h3');
-            if (pointsElement && pointsElement.textContent.includes('1 850')) {
-                pointsElement.textContent = userData.loyaltyPoints.toLocaleString();
+            if (reservation) {
+                document.getElementById('editReservationId').value = reservation.id;
+                document.getElementById('editCheckin').value = reservation.checkin;
+                document.getElementById('editCheckout').value = reservation.checkout;
+                document.getElementById('editAdults').value = reservation.adults;
+                document.getElementById('editChildren').value = reservation.children;
+                
+                document.getElementById('editModal').classList.add('active');
             }
         }
 
-        // Gestion des réservations
+        function updateReservation() {
+            const reservationId = document.getElementById('editReservationId').value;
+            const reservations = JSON.parse(localStorage.getItem(RESERVATIONS_KEY));
+            const reservationIndex = reservations.findIndex(r => r.id == reservationId);
+            
+            if (reservationIndex !== -1) {
+                reservations[reservationIndex].checkin = document.getElementById('editCheckin').value;
+                reservations[reservationIndex].checkout = document.getElementById('editCheckout').value;
+                reservations[reservationIndex].adults = document.getElementById('editAdults').value;
+                reservations[reservationIndex].children = document.getElementById('editChildren').value;
+                
+                localStorage.setItem(RESERVATIONS_KEY, JSON.stringify(reservations));
+                loadReservations();
+                updateStatistics();
+                
+                document.getElementById('editModal').classList.remove('active');
+                alert('Réservation modifiée avec succès !');
+            }
+        }
+
+        function openWhatsAppModal(reservationId) {
+            const reservations = JSON.parse(localStorage.getItem(RESERVATIONS_KEY));
+            const reservation = reservations.find(r => r.id == reservationId);
+            const userData = JSON.parse(localStorage.getItem(USER_DATA_KEY));
+            
+            if (reservation) {
+                const message = `Bonjour Hôtel Luxe,
+
+Je souhaite confirmer ma réservation :
+
+📅 Référence: #${reservation.id}
+🏨 Type de réservation: ${getReservationTypeText(reservation.type)}
+🛏️ Chambre: ${getRoomTypeText(reservation.roomType)}
+📅 Dates: ${formatDate(reservation.checkin)} au ${formatDate(reservation.checkout)}
+🌙 Nuits: ${reservation.nights || calculateNights(reservation.checkin, reservation.checkout)}
+👥 Personnes: ${reservation.adults} adulte(s), ${reservation.children} enfant(s)
+🍳 Petit-déjeuner: ${getBreakfastText(reservation.breakfastType)}
+
+💶 DÉTAIL DU MONTANT:
+• Prix de base: ${reservation.basePrice || 'N/A'}
+• Supplément chambre: ${reservation.roomExtra || 'N/A'}
+• Supplément petit-déjeuner: ${reservation.breakfastExtra || 'N/A'}
+• TOTAL: ${reservation.totalPrice} ${reservation.totalPriceFcfa ? '(' + reservation.totalPriceFcfa + ')' : ''}
+
+Informations personnelles:
+👤 Nom: ${userData.firstName} ${userData.lastName}
+📞 Téléphone: ${userData.phone}
+📧 Email: ${userData.email}
+
+Demandes spéciales: ${reservation.specialRequests || 'Aucune'}
+
+Merci de confirmer ma réservation.`;
+
+                document.getElementById('whatsappMessage').textContent = message;
+                
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+                
+                document.getElementById('sendWhatsAppBtn').href = whatsappUrl;
+                document.getElementById('whatsappModal').classList.add('active');
+            }
+        }
+
+        function openEmailModal(reservationId) {
+            const reservations = JSON.parse(localStorage.getItem(RESERVATIONS_KEY));
+            const reservation = reservations.find(r => r.id == reservationId);
+            const userData = JSON.parse(localStorage.getItem(USER_DATA_KEY));
+            
+            if (reservation) {
+                const emailContent = `Bonjour Hôtel Luxe,
+
+Je souhaite confirmer ma réservation :
+
+RÉFÉRENCE: #${reservation.id}
+TYPE DE RÉSERVATION: ${getReservationTypeText(reservation.type)}
+CHAMBRE: ${getRoomTypeText(reservation.roomType)}
+DATES: ${formatDate(reservation.checkin)} au ${formatDate(reservation.checkout)}
+NUITS: ${reservation.nights || calculateNights(reservation.checkin, reservation.checkout)}
+PERSONNES: ${reservation.adults} adulte(s), ${reservation.children} enfant(s)
+PETIT-DÉJEUNER: ${getBreakfastText(reservation.breakfastType)}
+
+DÉTAIL FINANCIER:
+• Prix de base: ${reservation.basePrice || 'N/A'}
+• Supplément chambre: ${reservation.roomExtra || 'N/A'}
+• Supplément petit-déjeuner: ${reservation.breakfastExtra || 'N/A'}
+• MONTANT TOTAL: ${reservation.totalPrice} ${reservation.totalPriceFcfa ? '(' + reservation.totalPriceFcfa + ')' : ''}
+
+INFORMATIONS PERSONNELLES:
+• Nom: ${userData.firstName} ${userData.lastName}
+• Téléphone: ${userData.phone}
+• Email: ${userData.email}
+
+DEMANDES SPÉCIALES: ${reservation.specialRequests || 'Aucune'}
+
+Merci de confirmer ma réservation.
+
+Cordialement,
+${userData.firstName} ${userData.lastName}`;
+
+                document.getElementById('emailMessage').textContent = emailContent;
+                document.getElementById('destinationEmail').textContent = 'contact@hotelluxe.com';
+                
+                // Stocker les données pour l'envoi
+                document.getElementById('emailModal').dataset.reservationId = reservationId;
+                document.getElementById('emailModal').dataset.emailContent = emailContent;
+                
+                document.getElementById('emailModal').classList.add('active');
+            }
+        }
+
+        function sendEmailConfirmation() {
+            const reservationId = document.getElementById('emailModal').dataset.reservationId;
+            const emailContent = document.getElementById('emailModal').dataset.emailContent;
+            const userData = JSON.parse(localStorage.getItem(USER_DATA_KEY));
+            
+            const subject = `Confirmation de réservation #${reservationId} - ${userData.firstName} ${userData.lastName}`;
+            
+            // Utilisation d'EmailJS pour l'envoi automatique
+            if (typeof emailjs !== 'undefined') {
+                const templateParams = {
+                    to_email: 'contact@hotelluxe.com',
+                    from_name: `${userData.firstName} ${userData.lastName}`,
+                    from_email: userData.email,
+                    subject: subject,
+                    message: emailContent,
+                    reservation_id: reservationId
+                };
+
+                emailjs.send('service_hotelluxe', 'template_reservation', templateParams)
+                    .then(function(response) {
+                        console.log('Email envoyé avec succès!', response.status, response.text);
+                        alert('Email de confirmation envoyé avec succès !');
+                        document.getElementById('emailModal').classList.remove('active');
+                    })
+                    .catch(function(error) {
+                        console.log('Erreur envoi email:', error);
+                        alert('Erreur lors de l\'envoi de l\'email. Utilisez l\'option "Ouvrir le client email".');
+                    });
+            } else {
+                alert('Service d\'envoi d\'email non disponible. Utilisez l\'option "Ouvrir le client email".');
+            }
+        }
+
+        function openEmailClient() {
+            const reservationId = document.getElementById('emailModal').dataset.reservationId;
+            const emailContent = document.getElementById('emailModal').dataset.emailContent;
+            const userData = JSON.parse(localStorage.getItem(USER_DATA_KEY));
+            
+            const subject = `Confirmation de réservation #${reservationId} - ${userData.firstName} ${userData.lastName}`;
+            const mailtoLink = `mailto:contact@hotelluxe.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailContent)}`;
+            
+            window.location.href = mailtoLink;
+            document.getElementById('emailModal').classList.remove('active');
+        }
+
         function cancelReservation(reservationId) {
             if (confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')) {
-                // Logique d'annulation
-                console.log('Réservation annulée:', reservationId);
-                alert('Réservation annulée avec succès.');
+                const reservations = JSON.parse(localStorage.getItem(RESERVATIONS_KEY));
+                const reservationIndex = reservations.findIndex(r => r.id == reservationId);
+                
+                if (reservationIndex !== -1) {
+                    reservations[reservationIndex].status = 'cancelled';
+                    localStorage.setItem(RESERVATIONS_KEY, JSON.stringify(reservations));
+                    loadReservations();
+                    updateStatistics();
+                    alert('Réservation annulée avec succès !');
+                }
             }
         }
 
-        // Exporter les données utilisateur
-        function exportUserData() {
-            const userData = JSON.parse(localStorage.getItem('hotelUserData')) || {};
-            const dataStr = JSON.stringify(userData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        function rebookReservation(reservationId) {
+            const reservations = JSON.parse(localStorage.getItem(RESERVATIONS_KEY));
+            const reservation = reservations.find(r => r.id == reservationId);
             
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = 'donnees_utilisateur_hotel_luxe.json';
-            link.click();
+            if (reservation) {
+                // Pré-remplir le formulaire de réservation avec les anciennes données
+                localStorage.setItem('rebookData', JSON.stringify(reservation));
+                window.location.href = 'reservation.html';
+            }
         }
+
+        function saveUserData() {
+            const userData = {
+                firstName: document.getElementById('profileFirstName').value,
+                lastName: document.getElementById('profileLastName').value,
+                email: document.getElementById('profileEmail').value,
+                phone: document.getElementById('profilePhone').value,
+                memberSince: document.getElementById('memberSince').textContent,
+                preferences: JSON.parse(localStorage.getItem(USER_DATA_KEY)).preferences
+            };
+            
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+            loadUserData();
+            alert('Profil mis à jour avec succès !');
+        }
+
+        function savePreferences() {
+            const userData = JSON.parse(localStorage.getItem(USER_DATA_KEY));
+            
+            userData.preferences = {
+                roomType: document.getElementById('prefRoomType').value,
+                breakfast: document.getElementById('prefBreakfast').value,
+                newsletter: document.getElementById('prefNewsletter').checked,
+                sms: document.getElementById('prefSMS').checked
+            };
+            
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+            alert('Préférences enregistrées avec succès !');
+        }
+
+        function updateStatistics() {
+            const reservations = JSON.parse(localStorage.getItem(RESERVATIONS_KEY));
+            const activeReservations = reservations.filter(r => r.status !== 'cancelled');
+            
+            // Total des réservations
+            document.getElementById('totalReservations').textContent = activeReservations.length;
+            
+            // Total des nuits
+            const totalNights = activeReservations.reduce((total, reservation) => {
+                return total + calculateNights(reservation.checkin, reservation.checkout);
+            }, 0);
+            document.getElementById('totalNights').textContent = totalNights;
+            
+            // Note moyenne (simulée)
+            document.getElementById('averageRating').textContent = '4.8';
+        }
+
+        // Fonctions utilitaires
+        function getReservationTypeText(type) {
+            const types = {
+                'nuit': 'Nuitée Complète',
+                'journee': 'Réservation Journée',
+                'dejeuner': 'Nuitée + Petit-déjeuner'
+            };
+            return types[type] || type;
+        }
+
+        function getRoomTypeText(type) {
+            const types = {
+                'standard': 'Chambre Standard',
+                'deluxe': 'Chambre Deluxe',
+                'suite': 'Suite'
+            };
+            return types[type] || type;
+        }
+
+        function getBreakfastText(type) {
+            const types = {
+                'sans': 'Sans petit-déjeuner',
+                'continental': 'Continental',
+                'buffet': 'Buffet complet'
+            };
+            return types[type] || type;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-FR');
+        }
+
+        function calculateNights(checkin, checkout) {
+            const start = new Date(checkin);
+            const end = new Date(checkout);
+            const timeDiff = end.getTime() - start.getTime();
+            return Math.ceil(timeDiff / (1000 * 3600 * 24));
+        }
+    </script>
+
+    <!-- Chargement d'EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialisation d'EmailJS
+        emailjs.init("your_public_key_here"); // Remplacez par votre clé publique EmailJS
     </script>
 </body>
 </html>
