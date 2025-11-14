@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Hôtel Luxe</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Variables CSS */
@@ -39,13 +42,6 @@
             background-color: #f5f7fa;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
         /* Header */
         header {
             background: var(--accent-color);
@@ -55,12 +51,6 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .logo {
@@ -74,16 +64,7 @@
             color: var(--secondary-color);
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-
-        nav ul li a {
+        .navbar-nav .nav-link {
             color: white;
             text-decoration: none;
             font-weight: 500;
@@ -92,15 +73,10 @@
             transition: var(--transition);
         }
 
-        nav ul li a:hover, nav ul li a.active {
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
             background: rgba(255, 255, 255, 0.1);
             color: var(--secondary-color);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
         }
 
         /* Page Header */
@@ -111,6 +87,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            margin-top: 76px;
         }
 
         .page-header::before {
@@ -141,12 +118,6 @@
         /* Contact Section */
         .contact-section {
             padding: 4rem 0;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
         }
 
         .contact-info h2 {
@@ -336,12 +307,6 @@
             margin-bottom: 1rem;
         }
 
-        .social-links {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
         .social-link {
             display: flex;
             align-items: center;
@@ -378,13 +343,6 @@
             color: var(--accent-color);
             margin-bottom: 2rem;
             font-size: 1.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
         }
 
         .form-group {
@@ -482,11 +440,6 @@
             margin-bottom: 1rem;
         }
 
-        .delivery-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
         .delivery-btn {
             flex: 1;
             padding: 1rem;
@@ -509,79 +462,6 @@
             display: block;
         }
 
-        /* Map Section */
-        .map-section {
-            padding: 4rem 0;
-            background: var(--light-bg);
-        }
-
-        .map-section h2 {
-            text-align: center;
-            color: var(--accent-color);
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
-
-        .map-container {
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-        }
-
-        .map-placeholder {
-            height: 400px;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            position: relative;
-        }
-
-        .map-content {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .map-content i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .map-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .map-directions {
-            margin-top: 2rem;
-            text-align: left;
-        }
-
-        .map-directions h4 {
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .map-directions ul {
-            list-style: none;
-        }
-
-        .map-directions li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .map-directions i {
-            font-size: 1rem;
-            width: 20px;
-            color: var(--primary-color);
-        }
-
         /* FAQ Section */
         .faq-section {
             padding: 4rem 0;
@@ -592,11 +472,6 @@
             color: var(--accent-color);
             margin-bottom: 3rem;
             font-size: 2rem;
-        }
-
-        .faq-grid {
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .faq-item {
@@ -650,13 +525,6 @@
             padding: 3rem 0 1rem;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
         .footer-section h3 {
             color: var(--secondary-color);
             margin-bottom: 1.5rem;
@@ -669,6 +537,7 @@
 
         .footer-section ul {
             list-style: none;
+            padding-left: 0;
         }
 
         .footer-section ul li a {
@@ -767,81 +636,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            nav ul {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--accent-color);
-                flex-direction: column;
-                padding: 1rem;
-                transform: translateY(-100%);
-                opacity: 0;
-                transition: var(--transition);
-                z-index: 1000;
-            }
-
-            nav ul.active {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            nav ul li {
-                margin: 0;
-                width: 100%;
-            }
-
-            nav ul li a {
-                display: block;
-                padding: 1rem;
-                border-radius: 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .social-links {
-                grid-template-columns: 1fr;
-            }
-
-            .delivery-buttons {
-                flex-direction: column;
-            }
-
-            .page-header h1 {
-                font-size: 2.2rem;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
-
-            .phone-float {
-                bottom: 7rem;
-            }
-
-            .contact-method {
-                padding: 1rem;
-            }
-
-            .whatsapp-number {
-                font-size: 1.2rem;
-                padding: 0.75rem 1.5rem;
-            }
-        }
-
         /* Animations */
         .fade-in {
             animation: fadeIn 0.8s ease-in;
@@ -870,26 +664,100 @@
         .notification.show {
             transform: translateX(0);
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 3rem 0;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .contact-method {
+                padding: 1rem;
+            }
+
+            .whatsapp-number {
+                font-size: 1.2rem;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .phone-float {
+                bottom: 7rem;
+            }
+
+            .navbar-collapse {
+                background: var(--accent-color);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+
+            .contact-method {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-icon {
+                margin: 0 auto;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="container header-container">
-            <a href="index.html" class="logo">Hôtel<span>Luxe</span></a>
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a href="index.html" class="logo">Hôtel<span>Luxe</span></a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span style="color: white; font-size: 1.5rem;">
+                        <i class="fas fa-bars"></i>
+                    </span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="apropos.html" class="nav-link">À propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reservation.html" class="nav-link">Réservation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="tableau-de-bord.html" class="nav-link">Tableau de bord</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link active">Contact</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <nav id="mainNav">
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="apropos.html">À propos</a></li>
-                    <li><a href="reservation.html">Réservation</a></li>
-                    <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+        </nav>
     </header>
 
     <!-- Page Header -->
@@ -903,294 +771,301 @@
     <!-- Contact Section -->
     <section class="contact-section">
         <div class="container">
-            <div class="contact-grid">
+            <div class="row g-4">
                 <!-- Informations de contact -->
-                <div class="contact-info">
-                    <h2>Prenez contact avec nous</h2>
-                    <p>Notre équipe dévouée est disponible pour répondre à toutes vos questions et vous accompagner dans l'organisation de votre séjour parfait.</p>
-                    
-                    <div class="contact-methods">
-                        <!-- WhatsApp prioritaire -->
-                        <div class="contact-method whatsapp">
-                            <div class="contact-icon">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>WhatsApp Prioritaire</h3>
-                                <p>+221 78 197 08 44</p>
-                                <small>Réponse immédiate • Réservations express • Assistance 24h/24</small>
-                                <div class="action-buttons">
-                                    <a href="https://wa.me/221781970844" class="action-btn whatsapp" target="_blank">
-                                        <i class="fab fa-whatsapp"></i>
-                                        Message WhatsApp
-                                    </a>
-                                    <a href="tel:+221781970844" class="action-btn phone">
-                                        <i class="fas fa-phone"></i>
-                                        Appeler
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Téléphone principal -->
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>Téléphone principal</h3>
-                                <p>+221 33 123 45 67</p>
-                                <small>Réception - Service multilingue</small>
-                                <div class="action-buttons">
-                                    <a href="tel:+221331234567" class="action-btn phone">
-                                        <i class="fas fa-phone"></i>
-                                        Appeler
-                                    </a>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <h2>Prenez contact avec nous</h2>
+                        <p>Notre équipe dévouée est disponible pour répondre à toutes vos questions et vous accompagner dans l'organisation de votre séjour parfait.</p>
                         
-                        <!-- Adresse -->
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-methods">
+                            <!-- WhatsApp prioritaire -->
+                            <div class="contact-method whatsapp">
+                                <div class="contact-icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>WhatsApp Prioritaire</h3>
+                                    <p>+221 78 197 08 44</p>
+                                    <small>Réponse immédiate • Réservations express • Assistance 24h/24</small>
+                                    <div class="action-buttons">
+                                        <a href="https://wa.me/221781970844" class="action-btn whatsapp" target="_blank">
+                                            <i class="fab fa-whatsapp"></i>
+                                            Message WhatsApp
+                                        </a>
+                                        <a href="tel:+221781970844" class="action-btn phone">
+                                            <i class="fas fa-phone"></i>
+                                            Appeler
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="contact-details">
-                                <h3>Adresse</h3>
-                                <p>Rue Khalifa Ababacar Sy<br>Saint-Louis, Sénégal</p>
-                                <small>Au cœur de la ville historique, proche de tous les sites d'intérêt</small>
+
+                            <!-- Téléphone principal -->
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Téléphone principal</h3>
+                                    <p>+221 33 123 45 67</p>
+                                    <small>Réception - Service multilingue</small>
+                                    <div class="action-buttons">
+                                        <a href="tel:+221331234567" class="action-btn phone">
+                                            <i class="fas fa-phone"></i>
+                                            Appeler
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- Email -->
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
+                            
+                            <!-- Adresse -->
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Adresse</h3>
+                                    <p>Rue Khalifa Ababacar Sy<br>Saint-Louis, Sénégal</p>
+                                    <small>Au cœur de la ville historique, proche de tous les sites d'intérêt</small>
+                                </div>
                             </div>
-                            <div class="contact-details">
-                                <h3>Email</h3>
-                                <p>contact@hotelluxe.sn</p>
-                                <p>reservations@hotelluxe.sn</p>
-                                <div class="action-buttons">
-                                    <a href="mailto:contact@hotelluxe.sn" class="action-btn email">
-                                        <i class="fas fa-envelope"></i>
-                                        Envoyer Email
-                                    </a>
+                            
+                            <!-- Email -->
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Email</h3>
+                                    <p>contact@hotelluxe.sn</p>
+                                    <p>reservations@hotelluxe.sn</p>
+                                    <div class="action-buttons">
+                                        <a href="mailto:contact@hotelluxe.sn" class="action-btn email">
+                                            <i class="fas fa-envelope"></i>
+                                            Envoyer Email
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Section WhatsApp prioritaire -->
-                    <div class="whatsapp-section">
-                        <h3><i class="fab fa-whatsapp"></i> Contact WhatsApp Express</h3>
-                        <p>Pour une réponse immédiate et une réservation en moins de 5 minutes :</p>
-                        <div class="whatsapp-number">+221 78 197 08 44</div>
-                        <p>Réservations • Informations • Assistance urgente</p>
-                        <div class="action-buttons" style="justify-content: center;">
-                            <a href="https://wa.me/221781970844" class="whatsapp-btn" target="_blank">
-                                <i class="fab fa-whatsapp"></i>
-                                Message WhatsApp Express
-                            </a>
+                        <!-- Section WhatsApp prioritaire -->
+                        <div class="whatsapp-section">
+                            <h3><i class="fab fa-whatsapp"></i> Contact WhatsApp Express</h3>
+                            <p>Pour une réponse immédiate et une réservation en moins de 5 minutes :</p>
+                            <div class="whatsapp-number">+221 78 197 08 44</div>
+                            <p>Réservations • Informations • Assistance urgente</p>
+                            <div class="d-flex justify-content-center">
+                                <a href="https://wa.me/221781970844" class="whatsapp-btn" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                    Message WhatsApp Express
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Réseaux sociaux -->
-                    <div class="social-section">
-                        <h3>Suivez notre actualité</h3>
-                        <div class="social-links">
-                            <a href="#" class="social-link">
-                                <i class="fab fa-facebook-f"></i>
-                                <span>Facebook</span>
-                            </a>
-                            <a href="#" class="social-link">
-                                <i class="fab fa-instagram"></i>
-                                <span>Instagram</span>
-                            </a>
-                            <a href="#" class="social-link">
-                                <i class="fab fa-tripadvisor"></i>
-                                <span>TripAdvisor</span>
-                            </a>
-                            <a href="#" class="social-link">
-                                <i class="fab fa-google"></i>
-                                <span>Google Business</span>
-                            </a>
+                        <!-- Réseaux sociaux -->
+                        <div class="social-section">
+                            <h3>Suivez notre actualité</h3>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <a href="#" class="social-link">
+                                        <i class="fab fa-facebook-f"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="#" class="social-link">
+                                        <i class="fab fa-instagram"></i>
+                                        <span>Instagram</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="#" class="social-link">
+                                        <i class="fab fa-tripadvisor"></i>
+                                        <span>TripAdvisor</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="#" class="social-link">
+                                        <i class="fab fa-google"></i>
+                                        <span>Google Business</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Formulaire de contact -->
-                <div class="contact-form-container fade-in">
-                    <form class="contact-form" id="contactForm">
-                        <h3>Envoyez-nous un message</h3>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="contactFirstName">Prénom *</label>
-                                <input type="text" id="contactFirstName" name="firstName" required placeholder="Votre prénom">
-                            </div>
-                            <div class="form-group">
-                                <label for="contactLastName">Nom *</label>
-                                <input type="text" id="contactLastName" name="lastName" required placeholder="Votre nom">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="contactEmail">Email *</label>
-                                <input type="email" id="contactEmail" name="email" required placeholder="votre@email.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="contactPhone">Téléphone *</label>
-                                <input type="tel" id="contactPhone" name="phone" required placeholder="+221 XX XXX XX XX">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contactSubject">Sujet *</label>
-                            <select id="contactSubject" name="subject" required>
-                                <option value="">Sélectionnez un sujet</option>
-                                <option value="reservation">Réservation</option>
-                                <option value="information">Demande d'information</option>
-                                <option value="group">Réservation de groupe</option>
-                                <option value="event">Organisation d'événement</option>
-                                <option value="spa">Services spa & bien-être</option>
-                                <option value="restaurant">Restaurant</option>
-                                <option value="reclamation">Réclamation</option>
-                                <option value="other">Autre</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contactMessage">Message *</label>
-                            <textarea id="contactMessage" name="message" rows="6" placeholder="Décrivez votre demande en détail..." required maxlength="500"></textarea>
-                            <div class="char-counter">
-                                <span id="messageCharCount">0</span>/500 caractères
-                            </div>
-                        </div>
-
-                        <!-- Options d'envoi -->
-                        <div class="delivery-options">
-                            <h4>Comment souhaitez-vous recevoir notre réponse ?</h4>
-                            <div class="delivery-buttons">
-                                <div class="delivery-btn" data-delivery="email">
-                                    <i class="fas fa-envelope"></i>
-                                    <span>Par Email</span>
+                <div class="col-lg-6">
+                    <div class="contact-form-container fade-in">
+                        <form class="contact-form" id="contactForm">
+                            <h3>Envoyez-nous un message</h3>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contactFirstName">Prénom *</label>
+                                        <input type="text" class="form-control" id="contactFirstName" name="firstName" required placeholder="Votre prénom">
+                                    </div>
                                 </div>
-                                <div class="delivery-btn" data-delivery="whatsapp">
-                                    <i class="fab fa-whatsapp"></i>
-                                    <span>Par WhatsApp</span>
-                                </div>
-                                <div class="delivery-btn" data-delivery="phone">
-                                    <i class="fas fa-phone"></i>
-                                    <span>Par Téléphone</span>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contactLastName">Nom *</label>
+                                        <input type="text" class="form-control" id="contactLastName" name="lastName" required placeholder="Votre nom">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group checkbox-group">
-                            <input type="checkbox" id="newsletter" name="newsletter">
-                            <label for="newsletter">Je souhaite recevoir les offres spéciales et actualités de l'Hôtel Luxe</label>
-                        </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contactEmail">Email *</label>
+                                        <input type="email" class="form-control" id="contactEmail" name="email" required placeholder="votre@email.com">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contactPhone">Téléphone *</label>
+                                        <input type="tel" class="form-control" id="contactPhone" name="phone" required placeholder="+221 XX XXX XX XX">
+                                    </div>
+                                </div>
+                            </div>
 
-                        <button type="submit" class="btn btn-primary btn-large">
-                            <i class="fas fa-paper-plane"></i> Envoyer le message
-                        </button>
-                    </form>
+                            <div class="form-group">
+                                <label for="contactSubject">Sujet *</label>
+                                <select class="form-select" id="contactSubject" name="subject" required>
+                                    <option value="">Sélectionnez un sujet</option>
+                                    <option value="reservation">Réservation</option>
+                                    <option value="information">Demande d'information</option>
+                                    <option value="group">Réservation de groupe</option>
+                                    <option value="event">Organisation d'événement</option>
+                                    <option value="spa">Services spa & bien-être</option>
+                                    <option value="restaurant">Restaurant</option>
+                                    <option value="reclamation">Réclamation</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactMessage">Message *</label>
+                                <textarea class="form-control" id="contactMessage" name="message" rows="6" placeholder="Décrivez votre demande en détail..." required maxlength="500"></textarea>
+                                <div class="char-counter">
+                                    <span id="messageCharCount">0</span>/500 caractères
+                                </div>
+                            </div>
+
+                            <!-- Options d'envoi -->
+                            <div class="delivery-options">
+                                <h4>Comment souhaitez-vous recevoir notre réponse ?</h4>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="delivery-btn" data-delivery="email">
+                                            <i class="fas fa-envelope"></i>
+                                            <span>Par Email</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="delivery-btn" data-delivery="whatsapp">
+                                            <i class="fab fa-whatsapp"></i>
+                                            <span>Par WhatsApp</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="delivery-btn" data-delivery="phone">
+                                            <i class="fas fa-phone"></i>
+                                            <span>Par Téléphone</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                    <label class="form-check-label" for="newsletter">
+                                        Je souhaite recevoir les offres spéciales et actualités de l'Hôtel Luxe
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-large w-100">
+                                <i class="fas fa-paper-plane"></i> Envoyer le message
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Carte 
-    <section class="map-section">
-        <div class="container">
-            <h2>Nous trouver</h2>
-            <div class="map-container">
-                <div class="map-placeholder">
-                    <div class="map-content">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <h3>Rue Khalifa Ababacar Sy</h3>
-                        <p>Saint-Louis, Sénégal</p>
-                        <div class="map-directions">
-                            <h4>Accès et transports</h4>
-                            <ul>
-                                <li><i class="fas fa-plane"></i> Aéroport: Saint-Louis (15km)</li>
-                                <li><i class="fas fa-train"></i> Gare: Saint-Louis Centre (2km)</li>
-                                <li><i class="fas fa-bus"></i> Bus: Toutes les lignes centre-ville</li>
-                                <li><i class="fas fa-car"></i> Parking: Privé et sécurisé gratuit</li>
-                                <li><i class="fas fa-taxi"></i> Taxi: Station devant l'hôtel</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>  -->
-
     <!-- FAQ Section -->
     <section class="faq-section">
         <div class="container">
             <h2>Questions fréquentes</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Quels sont les horaires de check-in et check-out ?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Le check-in est possible à partir de 15h et le check-out doit être effectué avant 12h. Un service de bagagerie est disponible si vous arrivez plus tôt ou repartez plus tard. Pour les arrivées tardives, merci de nous prévenir à l'avance.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>L'hôtel accepte-t-il les animaux ?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Oui, nous acceptons les animaux de compagnie (maximum 2 par chambre) avec un supplément de 15 000 FCFA par nuit. Merci de nous prévenir à l'avance pour que nous puissions préparer au mieux l'accueil de votre compagnon.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Quels moyens de paiement acceptez-vous ?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Nous acceptons les cartes de crédit Visa, MasterCard, les espèces (FCFA, EUR, USD), les virements bancaires et les paiements mobiles (Orange Money, Free Money). Un acompte peut être demandé pour les réservations de groupes.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Proposez-vous des services de navette depuis l'aéroport ?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Oui, nous proposons un service de navette privée depuis l'aéroport de Saint-Louis sur réservation préalable. Le tarif est de 25 000 FCFA par trajet. Merci de nous communiquer vos informations de vol au moins 24h à l'avance.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Y a-t-il une piscine et un spa dans l'hôtel ?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Notre établissement dispose d'une magnifique piscine extérieure chauffée, ouverte de 7h à 20h, et d'un spa proposant massages, soins du visage et soins bien-être. La réservation est recommandée pour les soins spa.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Proposez-vous des formules tout compris ?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Oui, nous proposons plusieurs formules : petit-déjeuner inclus, demi-pension et pension complète. Nous avons également des forfaits romantique, affaires et famille. Consultez notre page réservation ou contactez-nous pour plus de détails.</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="faq-grid">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Quels sont les horaires de check-in et check-out ?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Le check-in est possible à partir de 15h et le check-out doit être effectué avant 12h. Un service de bagagerie est disponible si vous arrivez plus tôt ou repartez plus tard. Pour les arrivées tardives, merci de nous prévenir à l'avance.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>L'hôtel accepte-t-il les animaux ?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Oui, nous acceptons les animaux de compagnie (maximum 2 par chambre) avec un supplément de 15 000 FCFA par nuit. Merci de nous prévenir à l'avance pour que nous puissions préparer au mieux l'accueil de votre compagnon.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Quels moyens de paiement acceptez-vous ?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Nous acceptons les cartes de crédit Visa, MasterCard, les espèces (FCFA, EUR, USD), les virements bancaires et les paiements mobiles (Orange Money, Free Money). Un acompte peut être demandé pour les réservations de groupes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Proposez-vous des services de navette depuis l'aéroport ?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Oui, nous proposons un service de navette privée depuis l'aéroport de Saint-Louis sur réservation préalable. Le tarif est de 25 000 FCFA par trajet. Merci de nous communiquer vos informations de vol au moins 24h à l'avance.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Y a-t-il une piscine et un spa dans l'hôtel ?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Notre établissement dispose d'une magnifique piscine extérieure chauffée, ouverte de 7h à 20h, et d'un spa proposant massages, soins du visage et soins bien-être. La réservation est recommandée pour les soins spa.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Proposez-vous des formules tout compris ?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Oui, nous proposons plusieurs formules : petit-déjeuner inclus, demi-pension et pension complète. Nous avons également des forfaits romantique, affaires et famille. Consultez notre page réservation ou contactez-nous pour plus de détails.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1200,46 +1075,54 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Hôtel Luxe</h3>
-                    <p>Votre oasis de tranquillité au cœur de Saint-Louis. Expérience de luxe, service personnalisé et souvenirs inoubliables.</p>
-                    <div class="social-links small">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
-                        <a href="#"><i class="fab fa-google"></i></a>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3>Hôtel Luxe</h3>
+                        <p>Votre oasis de tranquillité au cœur de Saint-Louis. Expérience de luxe, service personnalisé et souvenirs inoubliables.</p>
+                        <div class="social-links small">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                            <a href="#"><i class="fab fa-google"></i></a>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Rue Khalifa Ababacar Sy, Saint-Louis</p>
-                    <p><i class="fas fa-phone"></i> +221 33 123 45 67</p>
-                    <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
-                    <p><i class="fas fa-envelope"></i> contact@hotelluxe.sn</p>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Rue Khalifa Ababacar Sy, Saint-Louis</p>
+                        <p><i class="fas fa-phone"></i> +221 33 123 45 67</p>
+                        <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
+                        <p><i class="fas fa-envelope"></i> contact@hotelluxe.sn</p>
+                    </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Liens rapides</h3>
-                    <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="apropos.html">À propos</a></li>
-                        <li><a href="reservation.html">Réservation</a></li>
-                        <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3>Liens rapides</h3>
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="apropos.html">À propos</a></li>
+                            <li><a href="reservation.html">Réservation</a></li>
+                            <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Chambres & Suites</a></li>
-                        <li><a href="#">Restaurant & Bar</a></li>
-                        <li><a href="#">Spa & Bien-être</a></li>
-                        <li><a href="#">Salles de réunion</a></li>
-                        <li><a href="#">Événements</a></li>
-                    </ul>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Chambres & Suites</a></li>
+                            <li><a href="#">Restaurant & Bar</a></li>
+                            <li><a href="#">Spa & Bien-être</a></li>
+                            <li><a href="#">Salles de réunion</a></li>
+                            <li><a href="#">Événements</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             
@@ -1249,26 +1132,15 @@
         </div>
     </footer>
 
-    <!-- Boutons flottants 
-    <a href="https://wa.me/221781970844" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    
-    <a href="tel:+221781970844" class="phone-float">
-        <i class="fas fa-phone"></i>
-    </a> -->
-
     <!-- Notification -->
     <div class="notification" id="notification">
         Votre message a été envoyé avec succès !
     </div>
 
-    <script>
-        // Menu mobile
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').querySelector('ul').classList.toggle('active');
-        });
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script>
         // FAQ Accordéon
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
