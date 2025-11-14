@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - Hôtel Luxe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #2A9D8F;
+            --primary-dark: #1D7874;
+            --secondary-color: #E76F51;
+            --accent-color: #264653;
+            --gold-color: #D4AF37;
+            --light-bg: #F8F9FA;
+            --lighter-bg: #FFFFFF;
+            --border-color: #E9ECEF;
+            --text-dark: #264653;
+            --text-light: #6C757D;
+            --border-radius: 15px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--lighter-bg);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-color);
+            background: rgba(42, 157, 143, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Currency Selector */
+        .currency-selector {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .currency-btn {
+            padding: 8px 12px;
+            border: 2px solid var(--border-color);
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .currency-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(38, 70, 83, 0.8), rgba(38, 70, 83, 0.8)), 
+                        url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Type de réservation */
+        .reservation-type {
+            padding: 3rem 0;
+            background: var(--lighter-bg);
+        }
+
+        .reservation-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .type-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .type-card:hover::before,
+        .type-card.selected::before {
+            transform: scaleX(1);
+        }
+
+        .type-card:hover,
+        .type-card.selected {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .type-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            transition: var(--transition);
+        }
+
+        .type-card:hover .type-icon,
+        .type-card.selected .type-icon {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .type-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .type-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .type-badge {
+            background: var(--gold-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Formulaire de Réservation */
+        .reservation-form-section {
+            padding: 3rem 0;
+        }
+
+        .reservation-form {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .form-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+        }
+
+        /* Options de chambre */
+        .room-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .room-option {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .room-option:hover,
+        .room-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(42, 157, 143, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .room-info h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .room-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .room-features {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .room-features span {
+            background: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .room-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-align: right;
+        }
+
+        .room-price-fcfa {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        /* Options petit-déjeuner */
+        .breakfast-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .breakfast-option {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .breakfast-option:hover,
+        .breakfast-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(42, 157, 143, 0.05);
+        }
+
+        .breakfast-option h5 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .breakfast-option p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .breakfast-price {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        /* Récapitulatif du prix */
+        .price-summary {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .price-summary h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .price-details {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .price-row.total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            border-bottom: none;
+            border-top: 2px solid var(--primary-color);
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+        }
+
+        .price-fcfa {
+            color: var(--gold-color);
+            font-weight: 600;
+        }
+
+        /* Confirmation WhatsApp */
+        .whatsapp-confirmation {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            border: 2px solid #25D366;
+        }
+
+        .whatsapp-confirmation h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.5rem;
+        }
+
+        .whatsapp-confirmation .whatsapp-number {
+            font-size: 1.4rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin: 1rem 0;
+            display: inline-block;
+        }
+
+        .whatsapp-btn {
+            background: white;
+            color: #25D366;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: #128C7E;
+        }
+
+        /* Étapes de confirmation */
+        .confirmation-steps {
+            background: var(--light-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .confirmation-steps h4 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .steps-list {
+            list-style: none;
+        }
+
+        .steps-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .steps-list li:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Boutons */
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Animation de pulsation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--accent-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--lighter-bg);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .page-header {
+                padding: 100px 0 60px;
+                margin-top: 60px;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .reservation-form {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .reservation-type-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .room-options {
+                grid-template-columns: 1fr;
+            }
+
+            .currency-selector {
+                right: 10px;
+                bottom: 100px;
+                top: auto;
+                transform: none;
+                flex-direction: row;
+            }
+
+            .whatsapp-float {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Hôtel<span>Luxe</span></a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="reservation.html" class="active">Réservation</a></li>
+                    <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Currency Selector -->
+    <div class="currency-selector">
+        <button class="currency-btn active" data-currency="EUR">
+            <i class="fas fa-euro-sign"></i> EUR
+        </button>
+        <button class="currency-btn" data-currency="XOF">
+            <i class="fas fa-franc-sign"></i> FCFA
+        </button>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Réserver votre séjour</h1>
+            <p>Choisissez votre type de réservation et planifiez votre expérience inoubliable</p>
+        </div>
+    </section>
+
+    <!-- Type de réservation -->
+    <section class="reservation-type">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--accent-color); margin-bottom: 1rem;">Type de Réservation</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">Sélectionnez la formule qui correspond à vos besoins</p>
+            
+            <div class="reservation-type-grid">
+                <div class="type-card" data-type="nuit" data-base-price="120">
+                    <div class="type-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>Nuitée Complète</h3>
+                    <p>Profitez d'un séjour complet avec check-in à partir de 14h et check-out jusqu'à 12h</p>
+                    <div class="type-badge">Formule Classique</div>
+                </div>
+                
+                <div class="type-card" data-type="journee" data-base-price="80">
+                    <div class="type-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Réservation Journée</h3>
+                    <p>Utilisez la chambre de 8h à 18h - Parfait pour les escales ou réunions d'affaires</p>
+                    <div class="type-badge">Économique</div>
+                </div>
+                
+                <div class="type-card" data-type="dejeuner" data-base-price="150">
+                    <div class="type-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Nuitée + Petit-déjeuner</h3>
+                    <p>Séjour complet avec petit-déjeuner buffet inclus pour un réveil gourmand</p>
+                    <div class="type-badge">Plus Populaire</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulaire de Réservation -->
+    <section class="reservation-form-section">
+        <div class="container">
+            <form class="reservation-form" id="bookingForm">
+                <input type="hidden" id="reservationType" name="reservationType" value="nuit">
+                <input type="hidden" id="basePrice" name="basePrice" value="120">
+
+                <div class="form-section">
+                    <h3><i class="fas fa-calendar-alt"></i> Dates du séjour</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkin">Date d'arrivée</label>
+                            <input type="date" id="checkin" name="checkin" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout" id="checkoutLabel">Date de départ</label>
+                            <input type="date" id="checkout" name="checkout" required>
+                        </div>
+                    </div>
+                    <div class="form-group" id="dayUseTime" style="display: none;">
+                        <label for="dayUseHours">Heures d'utilisation (8h - 18h)</label>
+                        <input type="text" id="dayUseHours" value="8h - 18h" readonly style="background: var(--light-bg);">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-users"></i> Invités</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="adults">Adultes</label>
+                            <select id="adults" name="adults" required>
+                                <option value="1">1 Adulte</option>
+                                <option value="2" selected>2 Adultes</option>
+                                <option value="3">3 Adultes</option>
+                                <option value="4">4 Adultes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="children">Enfants</label>
+                            <select id="children" name="children">
+                                <option value="0" selected>Aucun</option>
+                                <option value="1">1 Enfant</option>
+                                <option value="2">2 Enfants</option>
+                                <option value="3">3 Enfants</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-bed"></i> Type de chambre</h3>
+                    <div class="room-options">
+                        <div class="room-option" data-type="standard" data-price="0">
+                            <div class="room-info">
+                                <h4>Chambre Standard</h4>
+                                <p>Confort et élégance dans un espace raffiné de 25m²</p>
+                                <div class="room-features">
+                                    <span><i class="fas fa-wifi"></i> Wi-Fi</span>
+                                    <span><i class="fas fa-tv"></i> TV</span>
+                                    <span><i class="fas fa-snowflake"></i> Climatisation</span>
+                                </div>
+                            </div>
+                            <div class="room-price">Inclus</div>
+                        </div>
+                        <div class="room-option" data-type="deluxe" data-price="30">
+                            <div class="room-info">
+                                <h4>Chambre Deluxe</h4>
+                                <p>Espace généreux de 35m² avec vue partielle sur la ville</p>
+                                <div class="room-features">
+                                    <span><i class="fas fa-wifi"></i> Wi-Fi</span>
+                                    <span><i class="fas fa-tv"></i> TV écran plat</span>
+                                    <span><i class="fas fa-couch"></i> Salon</span>
+                                </div>
+                            </div>
+                            <div class="room-price">+30€</div>
+                            <div class="room-price-fcfa">+19 650 FCFA</div>
+                        </div>
+                        <div class="room-option" data-type="suite" data-price="60">
+                            <div class="room-info">
+                                <h4>Suite</h4>
+                                <p>Suite spacieuse de 50m² avec salon et vue exceptionnelle</p>
+                                <div class="room-features">
+                                    <span><i class="fas fa-wifi"></i> Wi-Fi premium</span>
+                                    <span><i class="fas fa-hot-tub"></i> Jacuzzi</span>
+                                    <span><i class="fas fa-umbrella-beach"></i> Vue mer</span>
+                                </div>
+                            </div>
+                            <div class="room-price">+60€</div>
+                            <div class="room-price-fcfa">+39 300 FCFA</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="roomType" name="roomType" value="standard">
+                    <input type="hidden" id="roomExtra" name="roomExtra" value="0">
+                </div>
+
+                <!-- Options petit-déjeuner (uniquement pour les nuitées) -->
+                <div class="form-section" id="breakfastSection">
+                    <h3><i class="fas fa-coffee"></i> Options petit-déjeuner</h3>
+                    <div class="breakfast-options">
+                        <div class="breakfast-option" data-type="sans" data-price="0">
+                            <h5>Sans petit-déjeuner</h5>
+                            <p>Profitez de votre séjour sans repas inclus</p>
+                            <div class="breakfast-price">Inclus</div>
+                        </div>
+                        <div class="breakfast-option" data-type="continental" data-price="15">
+                            <h5>Petit-déjeuner Continental</h5>
+                            <p>Café, thé, jus, viennoiseries, fruits</p>
+                            <div class="breakfast-price">+15€ / personne</div>
+                            <div class="room-price-fcfa">+9 825 FCFA / personne</div>
+                        </div>
+                        <div class="breakfast-option" data-type="buffet" data-price="25">
+                            <h5>Buffet complet</h5>
+                            <p>Buffet varié avec options chaudes et froides</p>
+                            <div class="breakfast-price">+25€ / personne</div>
+                            <div class="room-price-fcfa">+16 375 FCFA / personne</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="breakfastType" name="breakfastType" value="sans">
+                    <input type="hidden" id="breakfastExtra" name="breakfastExtra" value="0">
+                </div>
+
+                <!-- Récapitulatif du prix -->
+                <div class="price-summary" id="priceSummary">
+                    <h3>Récapitulatif de votre réservation</h3>
+                    <div class="price-details">
+                        <div class="price-row">
+                            <span>Type de réservation:</span>
+                            <span id="reservationTypeDisplay">Nuitée Complète</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Durée:</span>
+                            <span id="durationDisplay">1 nuit</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Chambre:</span>
+                            <span id="roomTypeDisplay">Standard</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Petit-déjeuner:</span>
+                            <span id="breakfastDisplay">Sans</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Supplément chambre:</span>
+                            <span id="roomExtraDisplay">0€</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Supplément petit-déjeuner:</span>
+                            <span id="breakfastExtraDisplay">0€</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Total:</span>
+                            <span id="totalPrice">120€</span>
+                        </div>
+                        <div class="price-row total price-fcfa">
+                            <span>Total en FCFA:</span>
+                            <span id="totalPriceFcfa">78 600 FCFA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-user-circle"></i> Informations personnelles</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nom</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-comment-alt"></i> Demandes spéciales</h3>
+                    <div class="form-group">
+                        <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Préférences alimentaires, accessibilité, célébration spéciale, heure d'arrivée approximative..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Section confirmation WhatsApp -->
+                <div class="whatsapp-confirmation">
+                    <h3><i class="fab fa-whatsapp"></i> Confirmation par WhatsApp</h3>
+                    <p>Pour finaliser votre réservation, contactez-nous sur WhatsApp :</p>
+                    <div class="whatsapp-number">+221 78 197 08 44</div>
+                    <p>Envoyez-nous vos informations de réservation pour confirmation immédiate</p>
+                    <a href="https://wa.me/221781970844?text=Bonjour%20Hôtel%20Luxe,%20je%20souhaite%20confirmer%20ma%20réservation" 
+                       class="whatsapp-btn pulse" target="_blank" id="whatsappBtn">
+                        <i class="fab fa-whatsapp"></i>
+                        Confirmer sur WhatsApp
+                    </a>
+                </div>
+
+                <!-- Étapes de confirmation -->
+                <div class="confirmation-steps">
+                    <h4><i class="fas fa-list-check"></i> Étapes de confirmation</h4>
+                    <ul class="steps-list">
+                        <li>
+                            <div class="step-number">1</div>
+                            <div>Remplissez le formulaire de réservation</div>
+                        </li>
+                        <li>
+                            <div class="step-number">2</div>
+                            <div>Cliquez sur "Confirmer sur WhatsApp"</div>
+                        </li>
+                        <li>
+                            <div class="step-number">3</div>
+                            <div>Envoyez vos informations via WhatsApp</div>
+                        </li>
+                        <li>
+                            <div class="step-number">4</div>
+                            <div>Recevez votre confirmation par retour</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Préparer la réservation
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/221781970844" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hôtel Luxe</h3>
+                    <p>123 Avenue des Champs-Élysées<br>75008 Paris, France</p>
+                    <p><i class="fas fa-phone"></i> +33 1 23 45 67 89</p>
+                    <p><i class="fas fa-envelope"></i> contact@hotelluxe.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="apropos.html">À propos</a></li>
+                        <li><a href="reservation.html">Réservation</a></li>
+                        <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact WhatsApp</h3>
+                    <p><i class="fab fa-whatsapp"></i> +221 78 197 08 44</p>
+                    <p>Réservations et informations</p>
+                    <p>Disponible 24h/24</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Hôtel Luxe. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Taux de conversion EUR vers FCFA
+        const EUR_TO_XOF_RATE = 655;
+        let currentCurrency = 'EUR';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gestion du changement de devise
+            const currencyButtons = document.querySelectorAll('.currency-btn');
+            currencyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currency = this.dataset.currency;
+                    
+                    currencyButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentCurrency = currency;
+                    updateCurrencyDisplay(currency);
+                    updatePriceCalculation();
+                });
+            });
+
+            // Gestion du type de réservation
+            const typeCards = document.querySelectorAll('.type-card');
+            typeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    typeCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    const reservationType = this.dataset.type;
+                    const basePrice = parseInt(this.dataset.basePrice);
+                    
+                    document.getElementById('reservationType').value = reservationType;
+                    document.getElementById('basePrice').value = basePrice;
+                    
+                    // Mettre à jour l'interface selon le type
+                    updateReservationTypeUI(reservationType);
+                    updatePriceCalculation();
+                    updateWhatsAppLink();
+                });
+            });
+
+            // Sélectionner la nuitée par défaut
+            document.querySelector('.type-card[data-type="nuit"]').classList.add('selected');
+
+            // Gestion des chambres
+            const roomOptions = document.querySelectorAll('.room-option');
+            roomOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    roomOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    document.getElementById('roomType').value = this.dataset.type;
+                    document.getElementById('roomExtra').value = this.dataset.price;
+                    
+                    updatePriceCalculation();
+                    updateWhatsAppLink();
+                });
+            });
+
+            // Gestion du petit-déjeuner
+            const breakfastOptions = document.querySelectorAll('.breakfast-option');
+            breakfastOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    breakfastOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    document.getElementById('breakfastType').value = this.dataset.type;
+                    document.getElementById('breakfastExtra').value = this.dataset.price;
+                    
+                    updatePriceCalculation();
+                    updateWhatsAppLink();
+                });
+            });
+
+            // Sélectionner les options par défaut
+            document.querySelector('.room-option[data-type="standard"]').classList.add('selected');
+            document.querySelector('.breakfast-option[data-type="sans"]').classList.add('selected');
+
+            // Mettre à jour l'interface selon le type de réservation
+            function updateReservationTypeUI(type) {
+                const checkoutLabel = document.getElementById('checkoutLabel');
+                const dayUseTime = document.getElementById('dayUseTime');
+                const breakfastSection = document.getElementById('breakfastSection');
+                
+                if (type === 'journee') {
+                    checkoutLabel.textContent = 'Date d\'utilisation';
+                    dayUseTime.style.display = 'block';
+                    breakfastSection.style.display = 'none';
+                } else {
+                    checkoutLabel.textContent = 'Date de départ';
+                    dayUseTime.style.display = 'none';
+                    breakfastSection.style.display = 'block';
+                }
+                
+                // Mettre à jour l'affichage du type
+                const typeDisplay = {
+                    'nuit': 'Nuitée Complète',
+                    'journee': 'Réservation Journée',
+                    'dejeuner': 'Nuitée + Petit-déjeuner'
+                };
+                document.getElementById('reservationTypeDisplay').textContent = typeDisplay[type];
+            }
+
+            // Mettre à jour l'affichage des devises
+            function updateCurrencyDisplay(currency) {
+                const roomPrices = document.querySelectorAll('.room-price');
+                const roomPricesFcfa = document.querySelectorAll('.room-price-fcfa');
+                
+                if (currency === 'EUR') {
+                    roomPrices.forEach(price => price.style.display = 'block');
+                    roomPricesFcfa.forEach(price => price.style.display = 'none');
+                } else {
+                    roomPrices.forEach(price => price.style.display = 'none');
+                    roomPricesFcfa.forEach(price => price.style.display = 'block');
+                }
+            }
+
+            // Calculer et mettre à jour les prix
+            function updatePriceCalculation() {
+                const reservationType = document.getElementById('reservationType').value;
+                const basePrice = parseInt(document.getElementById('basePrice').value);
+                const roomExtra = parseInt(document.getElementById('roomExtra').value);
+                const breakfastType = document.getElementById('breakfastType').value;
+                const breakfastExtra = parseInt(document.getElementById('breakfastExtra').value);
+                const adults = parseInt(document.getElementById('adults').value);
+                
+                let totalPrice = basePrice + roomExtra;
+                
+                // Ajouter le petit-déjeuner si applicable
+                if (reservationType !== 'journee') {
+                    totalPrice += (breakfastExtra * adults);
+                }
+                
+                // Calculer la durée
+                const checkin = document.getElementById('checkin').value;
+                const checkout = document.getElementById('checkout').value;
+                let duration = 1;
+                
+                if (checkin && checkout) {
+                    const start = new Date(checkin);
+                    const end = new Date(checkout);
+                    const timeDiff = end.getTime() - start.getTime();
+                    duration = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    
+                    if (reservationType === 'journee') {
+                        duration = 1; // Forcer à 1 pour les réservations journée
+                    }
+                }
+                
+                const total = totalPrice * duration;
+                const totalFcfa = Math.round(total * EUR_TO_XOF_RATE);
+                
+                // Mettre à jour l'affichage
+                document.getElementById('durationDisplay').textContent = 
+                    reservationType === 'journee' ? '1 journée' : `${duration} nuit(s)`;
+                
+                document.getElementById('roomTypeDisplay').textContent = 
+                    document.querySelector('.room-option.selected h4').textContent;
+                
+                document.getElementById('breakfastDisplay').textContent = 
+                    document.querySelector('.breakfast-option.selected h5').textContent;
+                
+                // Afficher les prix selon la devise
+                if (currentCurrency === 'EUR') {
+                    document.getElementById('roomExtraDisplay').textContent = `${roomExtra}€`;
+                    document.getElementById('breakfastExtraDisplay').textContent = `${breakfastExtra * adults}€`;
+                    document.getElementById('totalPrice').textContent = `${total}€`;
+                } else {
+                    document.getElementById('roomExtraDisplay').textContent = `${Math.round(roomExtra * EUR_TO_XOF_RATE).toLocaleString()} FCFA`;
+                    document.getElementById('breakfastExtraDisplay').textContent = `${Math.round(breakfastExtra * adults * EUR_TO_XOF_RATE).toLocaleString()} FCFA`;
+                    document.getElementById('totalPrice').textContent = `${totalFcfa.toLocaleString()} FCFA`;
+                }
+                
+                document.getElementById('totalPriceFcfa').textContent = `${totalFcfa.toLocaleString()} FCFA`;
+                document.getElementById('priceSummary').style.display = 'block';
+            }
+
+            // Mettre à jour le lien WhatsApp
+            function updateWhatsAppLink() {
+                const formData = new FormData(document.getElementById('bookingForm'));
+                const reservationType = formData.get('reservationType');
+                const roomType = document.querySelector('.room-option.selected h4').textContent;
+                const breakfastType = document.querySelector('.breakfast-option.selected h5').textContent;
+                
+                const message = `Bonjour Hôtel Luxe,
+
+Je souhaite confirmer ma réservation :
+
+📅 Type: ${getReservationTypeText(reservationType)}
+🏨 Chambre: ${roomType}
+🍳 Petit-déjeuner: ${breakfastType}
+👥 Personnes: ${formData.get('adults')} adulte(s), ${formData.get('children')} enfant(s)
+📅 Dates: ${formData.get('checkin')} ${reservationType === 'journee' ? '(journée)' : 'au'} ${formData.get('checkout')}
+
+Informations personnelles:
+👤 Nom: ${formData.get('firstName')} ${formData.get('lastName')}
+📞 Téléphone: ${formData.get('phone')}
+📧 Email: ${formData.get('email')}
+
+Demandes spéciales: ${formData.get('specialRequests') || 'Aucune'}
+
+Merci de me confirmer la disponibilité.`;
+
+                const encodedMessage = encodeURIComponent(message);
+                document.getElementById('whatsappBtn').href = `https://wa.me/221781970844?text=${encodedMessage}`;
+            }
+
+            function getReservationTypeText(type) {
+                const types = {
+                    'nuit': 'Nuitée Complète',
+                    'journee': 'Réservation Journée',
+                    'dejeuner': 'Nuitée + Petit-déjeuner'
+                };
+                return types[type] || type;
+            }
+
+            // Écouter les changements
+            const formInputs = document.querySelectorAll('#bookingForm input, #bookingForm select, #bookingForm textarea');
+            formInputs.forEach(input => {
+                input.addEventListener('change', updatePriceCalculation);
+                input.addEventListener('input', updateWhatsAppLink);
+            });
+
+            // Soumission du formulaire
+            document.getElementById('bookingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                updateWhatsAppLink();
+                
+                const whatsappBtn = document.getElementById('whatsappBtn');
+                window.open(whatsappBtn.href, '_blank');
+                
+                alert('Votre réservation a été préparée ! Vous allez être redirigé vers WhatsApp pour confirmation.');
+            });
+
+            // Initialiser
+            updateReservationTypeUI('nuit');
+            updateCurrencyDisplay('EUR');
+            updatePriceCalculation();
+            updateWhatsAppLink();
+        });
+    </script>
+</body>
+</html>

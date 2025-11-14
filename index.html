@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hôtel Luxe - Accueil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #2A9D8F;
+            --primary-dark: #1D7874;
+            --secondary-color: #E76F51;
+            --accent-color: #264653;
+            --light-bg: #F8F9FA;
+            --lighter-bg: #FFFFFF;
+            --border-color: #E9ECEF;
+            --text-dark: #264653;
+            --text-light: #6C757D;
+            --border-radius: 15px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--lighter-bg);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Currency Selector */
+        .currency-selector {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .currency-btn {
+            padding: 8px 12px;
+            border: 2px solid var(--border-color);
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .currency-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: var(--lighter-bg);
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        /* Chambres Section */
+        .rooms {
+            padding: 5rem 0;
+        }
+
+        .rooms h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .room-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.1);
+        }
+
+        .room-content {
+            padding: 1.5rem;
+        }
+
+        .room-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .room-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .room-features span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .room-features i {
+            color: var(--primary-color);
+        }
+
+        .room-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .period {
+            color: var(--text-light);
+        }
+
+        .price-fcfa {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-left: 0.5rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 0.7rem 1.5rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Témoignages */
+        .testimonials {
+            padding: 5rem 0;
+            background: var(--lighter-bg);
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .testimonial-content p {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-author h4 {
+            margin-bottom: 0.2rem;
+        }
+
+        .testimonial-author span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--accent-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--lighter-bg);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+
+            .currency-selector {
+                right: 10px;
+                bottom: 100px;
+                top: auto;
+                transform: none;
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Hôtel<span>Luxe</span></a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li><a href="apropos.html">À propos</a></li>
+                    <li><a href="reservation.html">Réservation</a></li>
+                    <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Currency Selector -->
+    <div class="currency-selector">
+        <button class="currency-btn active" data-currency="EUR">
+            <i class="fas fa-euro-sign"></i> EUR
+        </button>
+        <button class="currency-btn" data-currency="XOF">
+            <i class="fas fa-franc-sign"></i> FCFA
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="animate-text">Bienvenue à l'Hôtel Luxe</h1>
+            <p class="hero-subtitle">Découvrez le luxe réinventé au cœur de Paris</p>
+            <div class="hero-buttons">
+                <a href="reservation.html" class="btn btn-primary">Réserver Maintenant</a>
+                <a href="apropos.html" class="btn btn-secondary">Découvrir</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Chambres Section -->
+    <section class="rooms">
+        <div class="container">
+            <h2>Nos Chambres</h2>
+            <div class="rooms-grid">
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=400" alt="Chambre Standard">
+                    </div>
+                    <div class="room-content">
+                        <h3>Chambre Standard</h3>
+                        <p>Confort et élégance dans un espace raffiné.</p>
+                        <div class="room-features">
+                            <span><i class="fas fa-wifi"></i> Wi-Fi gratuit</span>
+                            <span><i class="fas fa-tv"></i> TV écran plat</span>
+                            <span><i class="fas fa-snowflake"></i> Climatisation</span>
+                        </div>
+                        <div class="room-price">
+                            <span class="price">120€</span>
+                            <span class="period">/nuit</span>
+                            <span class="price-fcfa">~78 600 FCFA</span>
+                        </div>
+                        <a href="reservation.html" class="btn btn-outline">Réserver</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400" alt="Suite Deluxe">
+                    </div>
+                    <div class="room-content">
+                        <h3>Suite Deluxe</h3>
+                        <p>Espace généreux avec salon privatif et vue exceptionnelle.</p>
+                        <div class="room-features">
+                            <span><i class="fas fa-wifi"></i> Wi-Fi gratuit</span>
+                            <span><i class="fas fa-hot-tub"></i> Jacuzzi</span>
+                            <span><i class="fas fa-umbrella-beach"></i> Vue mer</span>
+                        </div>
+                        <div class="room-price">
+                            <span class="price">250€</span>
+                            <span class="period">/nuit</span>
+                            <span class="price-fcfa">~163 750 FCFA</span>
+                        </div>
+                        <a href="reservation.html" class="btn btn-outline">Réserver</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=400" alt="Suite Présidentielle">
+                    </div>
+                    <div class="room-content">
+                        <h3>Suite Présidentielle</h3>
+                        <p>L'ultime expérience de luxe avec service personnalisé.</p>
+                        <div class="room-features">
+                            <span><i class="fas fa-wine-bottle"></i> Mini-bar</span>
+                            <span><i class="fas fa-concierge-bell"></i> Service VIP</span>
+                            <span><i class="fas fa-vector-square"></i> 100m²</span>
+                        </div>
+                        <div class="room-price">
+                            <span class="price">500€</span>
+                            <span class="period">/nuit</span>
+                            <span class="price-fcfa">~327 500 FCFA</span>
+                        </div>
+                        <a href="reservation.html" class="btn btn-outline">Réserver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2>Nos Services Exclusifs</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Spa & Bien-être</h3>
+                    <p>Détendez-vous dans notre spa luxueux avec des soins personnalisés.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Restaurant Étoilé</h3>
+                    <p>Savourez une cuisine gastronomique dans notre restaurant primé.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Piscine Panoramique</h3>
+                    <p>Profitez de notre piscine avec vue imprenable sur la ville.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Service Concierge</h3>
+                    <p>Notre équipe dévouée est à votre service 24h/24.</p>
+                </div>
+               
+    </section>
+
+    <!-- Témoignages -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Ce que disent nos clients</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Un séjour exceptionnel ! Le service est impeccable et les chambres sont magnifiques."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100" alt="Marie L.">
+                        <div>
+                            <h4>Marie </h4>
+                            <span>Saly, Senegal</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Le spa est incroyable et la cuisine du restaurant est divine. Nous reviendrons !"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="" alt="Thomas B.">
+                        <div>
+                            <h4>Amadou</h4>
+                            <span>Saint-Louis, Senegal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hôtel Luxe</h3>
+                    <p>123 Avenue des Champs-Élysées<br>75008 Paris, France</p>
+                    <p><i class="fas fa-phone"></i> +33 1 23 45 67 89</p>
+                    <p><i class="fas fa-envelope"></i> contact@hotelluxe.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="apropos.html">À propos</a></li>
+                        <li><a href="reservation.html">Réservation</a></li>
+                        <li><a href="tableau-de-bord.html">Tableau de bord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Hôtel Luxe. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Taux de change fixe (1 EUR = 655.957 FCFA)
+        const EXCHANGE_RATE = 655.957;
+
+        // Gestion du menu responsive
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    menuToggle.innerHTML = mainNav.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : 
+                        '<i class="fas fa-bars"></i>';
+                });
+            }
+
+            // Gestion du sélecteur de devise
+            const currencyButtons = document.querySelectorAll('.currency-btn');
+            let currentCurrency = 'EUR';
+
+            function convertPrices(currency) {
+                const prices = document.querySelectorAll('.price');
+                const fcfaElements = document.querySelectorAll('.price-fcfa');
+                
+                prices.forEach(priceElement => {
+                    const originalText = priceElement.textContent;
+                    const priceEur = parseFloat(originalText);
+                    
+                    if (currency === 'XOF') {
+                        const priceFcfa = Math.round(priceEur * EXCHANGE_RATE);
+                        priceElement.textContent = `${priceFcfa.toLocaleString('fr-FR')}`;
+                        priceElement.nextElementSibling.textContent = ' FCFA';
+                        priceElement.nextElementSibling.style.display = 'inline';
+                    } else {
+                        priceElement.textContent = `${priceEur}€`;
+                        priceElement.nextElementSibling.textContent = '/nuit';
+                        priceElement.nextElementSibling.style.display = 'inline';
+                    }
+                });
+
+                // Mettre à jour l'affichage FCFA
+                fcfaElements.forEach(element => {
+                    if (currency === 'XOF') {
+                        element.style.display = 'none';
+                    } else {
+                        element.style.display = 'inline';
+                    }
+                });
+            }
+
+            currencyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Retirer la sélection précédente
+                    currencyButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Ajouter la nouvelle sélection
+                    this.classList.add('active');
+                    currentCurrency = this.getAttribute('data-currency');
+                    
+                    // Convertir les prix
+                    convertPrices(currentCurrency);
+                });
+            });
+
+            // Animation au scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observer les éléments à animer
+            document.querySelectorAll('.service-card, .room-card, .testimonial-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Smooth scroll pour le scroll indicator
+            document.querySelector('.scroll-indicator').addEventListener('click', function() {
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
